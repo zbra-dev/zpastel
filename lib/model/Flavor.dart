@@ -12,6 +12,7 @@ class Flavor implements StorableEntity {
   String name;
   String ingredients; // todo: abstract this in a better way.
   double value; // todo: improve this
+  String flavorImageUrl;
 
   @override
   String createdById;

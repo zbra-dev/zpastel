@@ -10,5 +10,6 @@ class FlavorConverter extends StorableEntityConverter<Flavor> {
     flavor.ingredients = data['ingredients'];
     flavor.name = data['name'];
     flavor.value = data['value'] ?? 0;
+    flavor.flavorImageUrl = data['flavorImageUrl'];
   }
 }
