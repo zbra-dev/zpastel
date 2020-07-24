@@ -72,35 +72,41 @@ class _SelectItemPageState extends State<SelectItemPage> {
                 ),
               ),
             ),
-            Visibility(
-              visible: _hasFlavors(),
-              child: Column(
-                children: <Widget>[
-                  SingleChildScrollView(
-                    child: GridView.count(
-                      crossAxisCount: 1,
-                      mainAxisSpacing: 10,
-                      children: List.generate(flavors == null ? 0 : flavors.length, (index) {
-                        return GestureDetector(
-                          onTap: () => _navigationMediator.openItemDetail(context, flavors[index]),
-                          // preview,
+            Expanded(
+              child: Visibility(
+                visible: _hasFlavors(),
+                child: SingleChildScrollView(
+                  child: GridView.count(
+                    crossAxisCount: 1,
+                    mainAxisSpacing: 10,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    children: List.generate(flavors.length, (index) {
+                      return GestureDetector(
+                        onTap: () => _navigationMediator.openItemDetail(context, flavors[index]),
+                        child: SizedBox(
                           child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Column(children: <Widget>[
-                                Align(alignment: Alignment.centerLeft, child: Text(flavors[index].name, style: AppTextTheme.of(context).textDefault)),
-                                SizedBox(height: 5),
-                                Align(alignment: Alignment.centerLeft, child: Text(flavors[index].ingredients, style: AppTextTheme.of(context).textDefault.copyWith(color: AppColors.secondaryTextColor))),
-                                SizedBox(height: 15),
-                                Align(alignment: Alignment.centerLeft, child: Text("R\$ ${flavors[index].value} ", style: AppTextTheme.of(context).textDefault)),
-                              ]),
-                              SizedBox(width: 50, height: 50, child: Image.network(flavors[index].flavorImageUrl)),
+                              Container(// TODO: remove this container
+                                decoration: BoxDecoration(border: Border.all()),
+                                child: Column(children: <Widget>[
+                                  Align(alignment: Alignment.centerLeft, child: Text(flavors[index].name, maxLines: 1, style: AppTextTheme.of(context).textDefault)),
+                                  SizedBox(height: 5),
+                                  Align(alignment: Alignment.centerLeft, child: Text(flavors[index].ingredients, maxLines: 2, style: AppTextTheme.of(context).textDefault.copyWith(color: AppColors.secondaryTextColor))),
+                                  SizedBox(height: 15),
+                                  Align(alignment: Alignment.centerLeft, child: Text("R\$ ${flavors[index].value} ", style: AppTextTheme.of(context).textDefault)),
+                                ]),
+                              ),
+                              SizedBox(width: 150, height: 150, child: Image.network(flavors[index].flavorImageUrl)),
                             ],
                           ),
-                        );
-                      }),
-                    ),
-                  )
-                ],
+                        ),
+                      );
+                    }),
+                  ),
+                ),
               ),
             ),
           ],
@@ -109,5 +115,5 @@ class _SelectItemPageState extends State<SelectItemPage> {
     );
   }
 
-  bool _hasFlavors() => this.flavors != null && this.flavors.length > 0;
+  bool _hasFlavors() => flavors != null && flavors.isNotEmpty;
 }
