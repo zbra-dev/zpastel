@@ -62,4 +62,16 @@ class FirestoreStore<T extends StorableEntity> {
       throw e;
     }
   }
+
+  Future<List<T>> findAll() async {
+    try {
+      var snapshots = await _collection.getDocuments();
+      return snapshots.documents
+          .map((doc) => _converter.convert(doc))
+          .toList();
+    } catch (e) {
+      print(e);
+      throw e;
+    }
+  }
 }

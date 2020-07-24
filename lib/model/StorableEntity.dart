@@ -1,3 +1,4 @@
+
 abstract class StorableEntity {
   String id;
   String createdById;
