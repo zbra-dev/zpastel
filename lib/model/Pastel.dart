@@ -1,8 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'Flavor.dart';
-import 'StorableEntity.dart';
 import 'Item.dart';
+import 'StorableEntity.dart';
 
 part 'Pastel.g.dart';
 
@@ -12,6 +12,8 @@ class Pastel implements Item, StorableEntity {
   String id;
   @override
   String orderId;
+  @override
+  int qtdy;
   Flavor flavor; // this will be a copy of the flavor for history purpose
 
   @override
@@ -23,7 +25,7 @@ class Pastel implements Item, StorableEntity {
   @override
   DateTime lastModifiedOn;
 
-  Pastel();
+  Pastel({this.flavor, this.qtdy});
 
   factory Pastel.fromJson(Map<String, dynamic> json) => _$PastelFromJson(json);
 
