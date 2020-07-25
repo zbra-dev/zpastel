@@ -4,6 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:zpastel/model/Flavor.dart';
 import 'package:zpastel/ui/helpers/AppBarBuilder.dart';
 import 'package:zpastel/ui/styles/AppTextTheme.dart';
+import 'package:zpastel/ui/styles/app-colors.dart';
 
 class ItemDetailPage extends StatefulWidget {
   Flavor flavor;
@@ -16,6 +17,7 @@ class ItemDetailPage extends StatefulWidget {
 
 class _ItemDetailPageState extends State<ItemDetailPage> {
   Flavor _flavor;
+  String _extraInformation = "";
 
   _ItemDetailPageState(this._flavor) : super();
 
@@ -26,34 +28,35 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
       body: SingleChildScrollView(
         physics: ScrollPhysics(),
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
           child: Column(
             children: <Widget>[
-              Align(alignment: Alignment.topLeft, child: Text(_flavor.name, maxLines: 1, style: AppTextTheme.of(context).textDefault)),
-              Align(alignment: Alignment.topLeft, child: Text(_flavor.ingredients, style: AppTextTheme.of(context).textDefault)),
+              Align(alignment: Alignment.topLeft, child: Text(_flavor.name, maxLines: 1, style: AppTextTheme.of(context).textLarge)),
+              SizedBox(height: 15),
+              Align(alignment: Alignment.topLeft, child: Text(_flavor.ingredients, style: AppTextTheme.of(context).textDefault.copyWith(color: AppColors.secondaryTextColor))),
+              SizedBox(height: 15),
               Align(alignment: Alignment.topLeft, child: Text(_flavor.valueInReal, maxLines: 1, style: AppTextTheme.of(context).textDefault)),
+              SizedBox(height: 20),
               TextFormField(
                 keyboardType: TextInputType.text,
-                autocorrect: true,
                 onChanged: (value) {
-                  extraInformation = value;
+                  _extraInformation = value;
                 },
                 maxLines: null,
                 style: TextStyle(fontSize: 16),
                 validator: (value) {
                   if (value.isEmpty || value.length < 1) {
-                    return 'Insira um título para sua dúvida para prosseguir';
+                    return 'Adicione um comentário';
                   }
                   return null;
                 },
                 decoration: new InputDecoration(
                   border: OutlineInputBorder(),
                   hintStyle: TextStyle(fontSize: 16),
-                  labelText: 'Título da dúvida',
+                  labelText: 'Alguma observação?',
                   labelStyle: new TextStyle(decorationStyle: TextDecorationStyle.solid),
                 ),
               ),
-
             ],
           ),
         ),
