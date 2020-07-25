@@ -43,7 +43,7 @@ class _SelectItemPageState extends State<SelectItemPage> {
         child: Column(
           children: <Widget>[
             SizedBox(
-              height: 110.0,
+              height: 100.0,
               child: Container(
                 decoration: BoxDecoration(color: AppColors.primaryColor),
                 child: Padding(
@@ -53,20 +53,19 @@ class _SelectItemPageState extends State<SelectItemPage> {
                     children: <Widget>[
                       Align(alignment: Alignment.centerLeft, child: Text("Bem vindo ao", style: AppTextTheme.of(context).textLargeBold.copyWith(color: AppColors.negativeTextColor))),
                       Align(alignment: Alignment.centerLeft, child: Text("ZPastel", style: AppTextTheme.of(context).textLargeBold.copyWith(color: AppColors.negativeTextColor))),
-                      SizedBox(height: 5),
+                      SizedBox(height: 10),
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Row(
                           children: <Widget>[
-                            Text("Encomende seu pastel com o", style: AppTextTheme.of(context).textSmallLight.copyWith(color: AppColors.secondaryNegativeTextColor)),
+                            Text("Encomende seu pastel com o", style: AppTextTheme.of(context).textDefaultLight.copyWith(color: AppColors.secondaryNegativeTextColor)),
                             SizedBox(width: 3),
-                            Text("Fernandes", style: AppTextTheme.of(context).textSmall.copyWith(color: AppColors.secondaryNegativeTextColor)),
+                            Text("Fernandes", style: AppTextTheme.of(context).textDefault.copyWith(color: AppColors.secondaryNegativeTextColor)),
                             SizedBox(width: 3),
-                            Text("abaixo", style: AppTextTheme.of(context).textSmallLight.copyWith(color: AppColors.secondaryNegativeTextColor)),
+                            Text("abaixo", style: AppTextTheme.of(context).textDefaultLight.copyWith(color: AppColors.secondaryNegativeTextColor)),
                           ],
                         ),
                       ),
-                      SizedBox(height: 10),
                     ],
                   ),
                 ),
@@ -98,7 +97,7 @@ class _SelectItemPageState extends State<SelectItemPage> {
                                 SizedBox(height: 5),
                                 Align(alignment: Alignment.centerLeft, child: Text(flavors[index].ingredients, maxLines: 2, style: AppTextTheme.of(context).textDefault.copyWith(color: AppColors.secondaryTextColor))),
                                 SizedBox(height: 15),
-                                Align(alignment: Alignment.centerLeft, child: Text("R\$ ${flavors[index].value} ", style: AppTextTheme.of(context).textDefault)),
+                                Align(alignment: Alignment.centerLeft, child: Text(flavors[index].valueInReal, style: AppTextTheme.of(context).textDefault)),
                               ]),
                             ),
                             SizedBox(width: 150, height: 150, child: Image.network(flavors[index].flavorImageUrl)),

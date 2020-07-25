@@ -13,15 +13,17 @@ class AppTextTheme {
     return new AppTextTheme(context);
   }
 
-  TextStyle get textSmall => Theme.of(this._context).textTheme.bodyText1.copyWith(fontSize: 14, fontWeight: FontWeight.normal);
+  TextStyle get textSmall => Theme.of(this._context).textTheme.bodyText1.copyWith(fontSize: 15, fontWeight: FontWeight.normal);
 
   TextStyle get textSmallLight => textSmall.copyWith(fontWeight: FontWeight.w200);
 
-  TextStyle get textSmallBold => textSmall.copyWith(fontWeight: FontWeight.bold);
+  TextStyle get textDefault => Theme.of(this._context).textTheme.bodyText1.copyWith(fontSize: 15, fontWeight: FontWeight.normal);
 
-  TextStyle get textDefault => Theme.of(this._context).textTheme.bodyText1.copyWith(fontSize: 16, fontWeight: FontWeight.normal);
+  TextStyle get textDefaultLight => textDefault.copyWith(fontWeight: FontWeight.w200);
 
-  TextStyle get textLarge => Theme.of(this._context).textTheme.bodyText1.copyWith(color: AppColors.primaryColor, fontSize: 24);
+  TextStyle get textDefaultBold => textDefault.copyWith(fontWeight: FontWeight.bold);
+
+  TextStyle get textLarge => Theme.of(this._context).textTheme.bodyText1.copyWith(color: AppColors.primaryColor, fontSize: 20);
 
   TextStyle get textLargeBold => textLarge.copyWith(fontWeight: FontWeight.bold);
 }

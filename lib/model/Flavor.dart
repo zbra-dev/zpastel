@@ -14,6 +14,8 @@ class Flavor implements StorableEntity {
   double value; // todo: improve this
   String flavorImageUrl;
 
+  String get valueInReal => "R\$ $value";
+
   @override
   String createdById;
   @override
