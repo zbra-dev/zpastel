@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeFactory().buildTheme(),
       routes: PageRoutes.build(context),
       // initialRoute: '/',
-      initialRoute: '/SelectItems',
+      initialRoute: PageRoutes.Login,
     );
   }
 }
