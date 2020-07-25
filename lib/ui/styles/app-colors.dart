@@ -3,7 +3,6 @@ import 'dart:ui';
 class AppColors {
   static double _opacity = 1;
 
-
   static Color red = new Color.fromRGBO(250, 85, 85, _opacity);
 
   static Color gray1 = new Color.fromRGBO(56, 56, 56, _opacity);
@@ -24,4 +23,6 @@ class AppColors {
   static Color secondaryNegativeTextColor = smokedWhite;
 
   static Color separatorColor = gray8;
+
+  static var disabledColor = gray7;
 }

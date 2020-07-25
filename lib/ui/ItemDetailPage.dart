@@ -18,6 +18,7 @@ class ItemDetailPage extends StatefulWidget {
 class _ItemDetailPageState extends State<ItemDetailPage> {
   Flavor _flavor;
   String _extraInformation = "";
+  int _qtdy = 1;
 
   _ItemDetailPageState(this._flavor) : super();
 
@@ -75,12 +76,45 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
             padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
             child: Row(
               children: <Widget>[
-                FlatButton(
-                  padding: EdgeInsets.symmetric(horizontal: 25, vertical: 16),
-                  color: AppColors.primaryColor,
-                  shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(10)),
-                  onPressed: () {},
-                  child: Text("Enviar", style: AppTextTheme.of(context).textDefaultBold.copyWith(color: AppColors.negativeTextColor)),
+                Container(
+                  decoration: BoxDecoration(border: Border.all(color: AppColors.separatorColor), shape: BoxShape.rectangle, borderRadius: BorderRadius.circular(10)),
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Row(
+                      children: <Widget>[
+                        IconButton(
+                          iconSize: 35,
+                          color: AppColors.primaryColor,
+                          disabledColor: AppColors.disabledColor,
+                          onPressed: _qtdy <= 1 ? null : () => setState(() => _qtdy--),
+                          icon: Icon(Icons.remove),
+                        ),
+                        SizedBox(width: 10),
+                        Text("$_qtdy", style: AppTextTheme.of(context).textLarge),
+                        SizedBox(width: 10),
+                        IconButton(
+                          iconSize: 35,
+                          color: AppColors.primaryColor,
+                          disabledColor: AppColors.disabledColor,
+                          onPressed: () => setState(() => _qtdy++),
+                          icon: Icon(Icons.add),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(width: 15),
+                Expanded(
+                  child: FlatButton(
+                    padding: EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+                    color: AppColors.primaryColor,
+                    shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(10)),
+                    onPressed: () {},
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[Text("Enviar", style: AppTextTheme.of(context).textLarge.copyWith(color: AppColors.negativeTextColor)), Text("R\$ ${_qtdy * _flavor.value}", style: AppTextTheme.of(context).textLarge.copyWith(color: AppColors.negativeTextColor))],
+                    ),
+                  ),
                 )
               ],
             ),
