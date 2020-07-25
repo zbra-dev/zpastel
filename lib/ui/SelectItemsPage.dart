@@ -75,37 +75,38 @@ class _SelectItemPageState extends State<SelectItemPage> {
             Expanded(
               child: Visibility(
                 visible: _hasFlavors(),
-                child: SingleChildScrollView(
-                  child: GridView.count(
-                    crossAxisCount: 1,
-                    mainAxisSpacing: 10,
-                    shrinkWrap: true,
-                    scrollDirection: Axis.vertical,
-                    children: List.generate(flavors.length, (index) {
-                      return GestureDetector(
-                        onTap: () => _navigationMediator.openItemDetail(context, flavors[index]),
-                        child: SizedBox(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Container(// TODO: remove this container
-                                decoration: BoxDecoration(border: Border.all()),
-                                child: Column(children: <Widget>[
-                                  Align(alignment: Alignment.centerLeft, child: Text(flavors[index].name, maxLines: 1, style: AppTextTheme.of(context).textDefault)),
-                                  SizedBox(height: 5),
-                                  Align(alignment: Alignment.centerLeft, child: Text(flavors[index].ingredients, maxLines: 2, style: AppTextTheme.of(context).textDefault.copyWith(color: AppColors.secondaryTextColor))),
-                                  SizedBox(height: 15),
-                                  Align(alignment: Alignment.centerLeft, child: Text("R\$ ${flavors[index].value} ", style: AppTextTheme.of(context).textDefault)),
-                                ]),
-                              ),
-                              SizedBox(width: 150, height: 150, child: Image.network(flavors[index].flavorImageUrl)),
-                            ],
-                          ),
+                child: GridView.count(
+                  crossAxisCount: 1,
+                  shrinkWrap: true,
+                  physics: ScrollPhysics(),
+                  mainAxisSpacing: 10,
+                  scrollDirection: Axis.vertical,
+                  children: List.generate(flavors.length, (index) {
+                    return GestureDetector(
+                      onTap: () => _navigationMediator.openItemDetail(context, flavors[index]),
+                      child: Container(
+                        decoration: BoxDecoration(border: Border.all()),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Container(
+                              // TODO: remove this container
+                              decoration: BoxDecoration(border: Border.all()),
+                              child: Column(children: <Widget>[
+                                Align(alignment: Alignment.centerLeft, child: Text(flavors[index].name, maxLines: 1, style: AppTextTheme.of(context).textDefault)),
+                                SizedBox(height: 5),
+                                Align(alignment: Alignment.centerLeft, child: Text(flavors[index].ingredients, maxLines: 2, style: AppTextTheme.of(context).textDefault.copyWith(color: AppColors.secondaryTextColor))),
+                                SizedBox(height: 15),
+                                Align(alignment: Alignment.centerLeft, child: Text("R\$ ${flavors[index].value} ", style: AppTextTheme.of(context).textDefault)),
+                              ]),
+                            ),
+                            SizedBox(width: 150, height: 150, child: Image.network(flavors[index].flavorImageUrl)),
+                          ],
                         ),
-                      );
-                    }),
-                  ),
+                      ),
+                    );
+                  }),
                 ),
               ),
             ),
