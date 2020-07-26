@@ -33,11 +33,7 @@ class NavigationMediator {
     Navigator.push(context, new MaterialPageRoute(builder: (BuildContext context) => ItemDetailPage(flavor: flavor, currentOrder: currentOrder)));
   }
 
-  void openCart(BuildContext context, Order currentOrder) {
-    Navigator.of(context).pushNamed(PageRoutes.Cart);
-  }
-
   void openReviewOrder(BuildContext context, Order order) {
-    Navigator.push(context, new MaterialPageRoute(builder: (BuildContext context) => ReviewOrderPage(order: order)));
+    Navigator.push(context, new MaterialPageRoute(builder: (BuildContext context) => ReviewOrderPage(currentOrder: order)));
   }
 }

@@ -9,12 +9,12 @@ import 'package:zpastel/ui/styles/AppTextTheme.dart';
 import 'package:zpastel/ui/styles/app-colors.dart';
 
 class ReviewOrderPage extends StatefulWidget {
-  Order order;
+  Order currentOrder;
 
   @override
-  _ReviewOrderPageState createState() => _ReviewOrderPageState(order);
+  _ReviewOrderPageState createState() => _ReviewOrderPageState(currentOrder);
 
-  ReviewOrderPage({Key key, @required this.order}) : super(key: key);
+  ReviewOrderPage({Key key, @required this.currentOrder}) : super(key: key);
 }
 
 class _ReviewOrderPageState extends State<ReviewOrderPage> {

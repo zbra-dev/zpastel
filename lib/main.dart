@@ -14,7 +14,6 @@ class MyApp extends StatelessWidget {
       title: 'ZPastel',
       theme: ThemeFactory().buildTheme(),
       routes: PageRoutes.build(context),
-      // initialRoute: '/',
       initialRoute: PageRoutes.Login,
     );
   }
