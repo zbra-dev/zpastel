@@ -71,45 +71,60 @@ class _SelectItemPageState extends State<SelectItemPage> {
                 ),
               ),
             ),
-            Expanded(
-              child: Visibility(
-                visible: _hasFlavors(),
-                child: GridView.count(
-                  crossAxisCount: 1,
-                  shrinkWrap: true,
-                  physics: ScrollPhysics(),
-                  mainAxisSpacing: 10,
-                  scrollDirection: Axis.vertical,
-                  children: List.generate(flavors.length, (index) {
-                    return GestureDetector(
-                      onTap: () => _navigationMediator.openItemDetail(context, flavors[index]),
-                      child: Container(
-                        decoration: BoxDecoration(border: Border.all()),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Container(
-                              // TODO: remove this container
-                              decoration: BoxDecoration(border: Border.all()),
-                              child: Column(children: <Widget>[
-                                Align(alignment: Alignment.centerLeft, child: Text(flavors[index].name, maxLines: 1, style: AppTextTheme.of(context).textDefault)),
-                                SizedBox(height: 5),
-                                Align(alignment: Alignment.centerLeft, child: Text(flavors[index].ingredients, maxLines: 2, style: AppTextTheme.of(context).textDefault.copyWith(color: AppColors.secondaryTextColor))),
-                                SizedBox(height: 15),
-                                Align(alignment: Alignment.centerLeft, child: Text(flavors[index].valueInReal, style: AppTextTheme.of(context).textDefault)),
-                              ]),
-                            ),
-                            SizedBox(width: 150, height: 150, child: Image.network(flavors[index].flavorImageUrl)),
-                          ],
+            buildExpandedGridView(context),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Expanded buildExpandedGridView(BuildContext context) {
+    return Expanded(
+      child: Visibility(
+        visible: _hasFlavors(),
+        child: GridView.count(
+          crossAxisCount: 1,
+          shrinkWrap: true,
+          childAspectRatio: 3,
+          physics: ScrollPhysics(),
+          mainAxisSpacing: 1,
+          scrollDirection: Axis.vertical,
+          children: List.generate(flavors.length, (index) {
+            return GestureDetector(
+              onTap: () => _navigationMediator.openItemDetail(context, flavors[index]),
+              child: Container(
+                decoration: BoxDecoration(border: Border(top: BorderSide(color: AppColors.separatorColor, width: 2))),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 20),
+                          child: Column(children: <Widget>[
+                            Align(alignment: Alignment.centerLeft, child: Text(flavors[index].name, maxLines: 1, style: AppTextTheme.of(context).textDefault)),
+                            SizedBox(height: 5),
+                            Align(alignment: Alignment.centerLeft, child: Text(flavors[index].ingredients, maxLines: 2, style: AppTextTheme.of(context).textDefault.copyWith(color: AppColors.secondaryTextColor))),
+                            SizedBox(height: 15),
+                            Align(alignment: Alignment.centerLeft, child: Text(flavors[index].valueInReal, style: AppTextTheme.of(context).textDefault)),
+                          ]),
                         ),
                       ),
-                    );
-                  }),
+                      ClipRRect(
+                          borderRadius: BorderRadius.all(Radius.elliptical(5, 10)),
+                          child: Image.network(
+                            flavors[index].flavorImageUrl,
+                            width: 150,
+                            height: 150,
+                          )),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            );
+          }),
         ),
       ),
     );
