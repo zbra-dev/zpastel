@@ -57,8 +57,8 @@ class _SelectItemPageState extends State<SelectItemPage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
-                      Align(alignment: Alignment.centerLeft, child: Text("Bem vindo ao", style: AppTextTheme.of(context).textLargeBold.copyWith(color: AppColors.negativeTextColor))),
-                      Align(alignment: Alignment.centerLeft, child: Text("ZPastel", style: AppTextTheme.of(context).textLargeBold.copyWith(color: AppColors.negativeTextColor))),
+                      Align(alignment: Alignment.centerLeft, child: Text("Bem vindo ao", style: AppTextTheme.of(context).textLargerBold.copyWith(color: AppColors.negativeTextColor))),
+                      Align(alignment: Alignment.centerLeft, child: Text("ZPastel", style: AppTextTheme.of(context).textLargerBold.copyWith(color: AppColors.negativeTextColor))),
                       SizedBox(height: 10),
                       Align(
                         alignment: Alignment.centerLeft,

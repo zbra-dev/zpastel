@@ -4,9 +4,9 @@ import 'package:flutter/rendering.dart';
 import 'package:zpastel/model/Order.dart';
 import 'package:zpastel/services/OrderService.dart';
 import 'package:zpastel/ui/helpers/AppBarBuilder.dart';
+import 'package:zpastel/ui/helpers/BuildContextExtension.dart';
 import 'package:zpastel/ui/styles/AppTextTheme.dart';
 import 'package:zpastel/ui/styles/app-colors.dart';
-import 'package:zpastel/ui/helpers/BuildContextExtension.dart';
 
 class ReviewOrderPage extends StatefulWidget {
   Order order;
@@ -46,7 +46,7 @@ class _ReviewOrderPageState extends State<ReviewOrderPage> {
                               width: context.widthSize(50),
                               child: Text("Hora de revisar seu pedido",
                                   style: AppTextTheme.of(context)
-                                      .textLargeBold
+                                      .textLargerBold
                                       .copyWith(
                                           fontSize: 25,
                                           color: AppColors.white)),

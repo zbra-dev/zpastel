@@ -25,7 +25,6 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
   final OrderService _orderService = OrderService();
   final NavigationMediator _navigationMediator = NavigationMediator();
 
-  final NavigationMediator _navigationMediator = NavigationMediator();
   Flavor _flavor;
   Order _currentOrder;
   String _extraInformation = "";
@@ -54,7 +53,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                   child: Column(
                     children: <Widget>[
-                      Align(alignment: Alignment.topLeft, child: Text(_flavor.name, maxLines: 1, style: AppTextTheme.of(context).textLarge)),
+                      Align(alignment: Alignment.topLeft, child: Text(_flavor.name, maxLines: 1, style: AppTextTheme.of(context).textLarger)),
                       SizedBox(height: 15),
                       Align(alignment: Alignment.topLeft, child: Text(_flavor.ingredients, style: AppTextTheme.of(context).textDefault.copyWith(color: AppColors.secondaryTextColor))),
                       SizedBox(height: 15),
@@ -115,7 +114,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                             ),
                           ),
                           SizedBox(width: 5),
-                          Text("$_qtdy", style: AppTextTheme.of(context).textLarge),
+                          Text("$_qtdy", style: AppTextTheme.of(context).textLarger),
                           SizedBox(width: 5),
                           Flexible(
                             child: IconButton(
@@ -134,12 +133,12 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                   Flexible(
                     flex: 2,
                     child: FlatButton(
-                      padding: EdgeInsets.symmetric(horizontal: 25, vertical: 13),
+                      padding: EdgeInsets.symmetric(horizontal: 25, vertical: 14),
                       color: AppColors.primaryColor,
                       shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(10)),
                       onPressed: () {
                         _currentOrder.addItem(Pastel(flavor: _flavor, qtdy: _qtdy, extraInformation: _extraInformation));
-                        _navigationMediator.openCart(context, _currentOrder);
+                        _navigationMediator.openReviewOrder(context, _currentOrder);
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -23,7 +23,11 @@ class AppTextTheme {
 
   TextStyle get textDefaultBold => textDefault.copyWith(fontWeight: FontWeight.bold);
 
-  TextStyle get textLarge => Theme.of(this._context).textTheme.bodyText1.copyWith(fontSize: 20, fontWeight: FontWeight.normal, color: AppColors.textColor);
+  TextStyle get textLarge => Theme.of(this._context).textTheme.bodyText1.copyWith(fontSize: 18, fontWeight: FontWeight.normal, color: AppColors.textColor);
 
-  TextStyle get textLargeBold => textLarge.copyWith(fontWeight: FontWeight.bold);
+  TextStyle get textLargeBold => textLarger.copyWith(fontWeight: FontWeight.bold);
+
+  TextStyle get textLarger => Theme.of(this._context).textTheme.bodyText1.copyWith(fontSize: 20, fontWeight: FontWeight.normal, color: AppColors.textColor);
+
+  TextStyle get textLargerBold => textLarger.copyWith(fontWeight: FontWeight.bold);
 }

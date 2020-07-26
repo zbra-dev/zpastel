@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:zpastel/ui/helpers/BuildContextExtension.dart';
 import 'package:zpastel/ui/mediators/NavigatorMediator.dart';
 import 'package:zpastel/ui/styles/AppTextTheme.dart';
 import 'package:zpastel/ui/styles/app-colors.dart';
-import 'package:zpastel/ui/helpers/BuildContextExtension.dart';
 
 import 'helpers/ButtonFactory.dart';
 import 'images/ImageFactory.dart';
@@ -77,7 +77,7 @@ class _LoginPageState extends State<LoginPage> {
                           Text(
                             "Olá, bem vindo!",
                             textAlign: TextAlign.center,
-                            style: AppTextTheme.of(context).textLargeBold.copyWith(fontSize: 24),
+                            style: AppTextTheme.of(context).textLargerBold.copyWith(fontSize: 24),
                           ),
                           SizedBox(height: 5.0),
                           Text(
