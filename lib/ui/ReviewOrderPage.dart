@@ -8,6 +8,8 @@ import 'package:zpastel/ui/helpers/BuildContextExtension.dart';
 import 'package:zpastel/ui/styles/AppTextTheme.dart';
 import 'package:zpastel/ui/styles/app-colors.dart';
 
+import 'mediators/NavigatorMediator.dart';
+
 class ReviewOrderPage extends StatefulWidget {
   Order currentOrder;
 
@@ -19,6 +21,8 @@ class ReviewOrderPage extends StatefulWidget {
 
 class _ReviewOrderPageState extends State<ReviewOrderPage> {
   final OrderService _orderService = OrderService();
+  final NavigationMediator _navigationMediator = NavigationMediator();
+
   Order _order;
 
   _ReviewOrderPageState(this._order) : super();
@@ -44,12 +48,7 @@ class _ReviewOrderPageState extends State<ReviewOrderPage> {
                           children: <Widget>[
                             Container(
                               width: context.widthSize(50),
-                              child: Text("Hora de revisar seu pedido",
-                                  style: AppTextTheme.of(context)
-                                      .textLargerBold
-                                      .copyWith(
-                                          fontSize: 25,
-                                          color: AppColors.white)),
+                              child: Text("Hora de revisar seu pedido", style: AppTextTheme.of(context).textLargerBold.copyWith(fontSize: 25, color: AppColors.white)),
                             ),
                             SizedBox(height: 20),
                             Container(color: AppColors.white, height: 135)
@@ -83,11 +82,12 @@ class _ReviewOrderPageState extends State<ReviewOrderPage> {
                     padding: EdgeInsets.all(20),
                     child: RaisedButton(
                       color: AppColors.red,
-                      child: Text("Vai Fernandes", style: AppTextTheme.of(context)
-                          .textDefaultBold
-                          .copyWith(
-                          fontSize: 16,
-                          color: AppColors.white)),
+                      onPressed: () async {
+                        await _orderService.doOrder(_order);
+                        _order.items.clear();
+                        _navigationMediator.popToRootPage(context);
+                      },
+                      child: Text("Vai Fernandes", style: AppTextTheme.of(context).textDefaultBold.copyWith(fontSize: 16, color: AppColors.white)),
                     ),
                   ),
                 )),

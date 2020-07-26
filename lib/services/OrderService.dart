@@ -10,7 +10,7 @@ class OrderService {
     return _flavorRepository.findAll();
   }
 
-  void doOrder(Order order) {
+  Future doOrder(Order order) async {
     // send message in Slack
   }
 
