@@ -29,26 +29,48 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarBuilder().withTitle("Detalhes do item").withClose().build(),
+      appBar: AppBarBuilder().withTitle("Detalhes do item").build(),
       body: SafeArea(
         child: Stack(children: <Widget>[
           SingleChildScrollView(
+            padding: EdgeInsets.fromLTRB(0, 0, 0, 125),
             physics: ScrollPhysics(),
             child: Column(
               children: <Widget>[
-                Container(
-                  color: AppColors.primaryColor,
-                  child: Image.network(_flavor.flavorImageUrl),
-                ),
+                Stack(children: <Widget>[
+                  Container(
+                      height: 200,
+                      color: AppColors.primaryColor
+                  ),
+                  Padding(
+                      padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: Image.network(_flavor.flavorImageUrl))),
+                ],),
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                   child: Column(
                     children: <Widget>[
-                      Align(alignment: Alignment.topLeft, child: Text(_flavor.name, maxLines: 1, style: AppTextTheme.of(context).textLarge)),
+                      Align(
+                          alignment: Alignment.topLeft,
+                          child: Text(_flavor.name,
+                              maxLines: 1,
+                              style: AppTextTheme.of(context).textLarge)),
                       SizedBox(height: 15),
-                      Align(alignment: Alignment.topLeft, child: Text(_flavor.ingredients, style: AppTextTheme.of(context).textDefault.copyWith(color: AppColors.secondaryTextColor))),
+                      Align(
+                          alignment: Alignment.topLeft,
+                          child: Text(_flavor.ingredients,
+                              style: AppTextTheme.of(context)
+                                  .textDefault
+                                  .copyWith(
+                                      color: AppColors.secondaryTextColor))),
                       SizedBox(height: 15),
-                      Align(alignment: Alignment.topLeft, child: Text(_flavor.valueInReal, maxLines: 1, style: AppTextTheme.of(context).textDefault)),
+                      Align(
+                          alignment: Alignment.topLeft,
+                          child: Text(_flavor.valueInReal,
+                              maxLines: 1,
+                              style: AppTextTheme.of(context).textDefault)),
                       SizedBox(height: 20),
                       TextField(
                         keyboardType: TextInputType.text,
@@ -64,7 +86,8 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                           border: OutlineInputBorder(),
                           hintStyle: TextStyle(fontSize: 16),
                           labelText: 'Alguma observação?',
-                          labelStyle: new TextStyle(decorationStyle: TextDecorationStyle.solid),
+                          labelStyle: new TextStyle(
+                              decorationStyle: TextDecorationStyle.solid),
                         ),
                       ),
                     ],
@@ -89,39 +112,52 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
               padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
               child: Row(
                 children: <Widget>[
-                  Container(
-                    decoration: BoxDecoration(border: Border.all(color: AppColors.separatorColor), shape: BoxShape.rectangle, borderRadius: BorderRadius.circular(10)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(5.0),
+                  Flexible(
+                    flex: 1,
+                    child: Container(
+                      decoration: BoxDecoration(
+                          border: Border.all(color: AppColors.separatorColor),
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(10)),
                       child: Row(
                         children: <Widget>[
-                          IconButton(
-                            iconSize: 35,
-                            color: AppColors.primaryColor,
-                            disabledColor: AppColors.disabledColor,
-                            onPressed: _qtdy <= 1 ? null : () => setState(() => _qtdy--),
-                            icon: Icon(Icons.remove),
+                          Flexible(
+                            child: IconButton(
+                              iconSize: 25,
+                              color: AppColors.primaryColor,
+                              disabledColor: AppColors.disabledColor,
+                              onPressed: _qtdy <= 1
+                                  ? null
+                                  : () => setState(() => _qtdy--),
+                              icon: Icon(Icons.remove),
+                            ),
                           ),
-                          SizedBox(width: 10),
-                          Text("$_qtdy", style: AppTextTheme.of(context).textLarge),
-                          SizedBox(width: 10),
-                          IconButton(
-                            iconSize: 35,
-                            color: AppColors.primaryColor,
-                            disabledColor: AppColors.disabledColor,
-                            onPressed: () => setState(() => _qtdy++),
-                            icon: Icon(Icons.add),
+                          SizedBox(width: 5),
+                          Text("$_qtdy",
+                              style: AppTextTheme.of(context).textLarge),
+                          SizedBox(width: 5),
+                          Flexible(
+                            child: IconButton(
+                              iconSize: 25,
+                              color: AppColors.primaryColor,
+                              disabledColor: AppColors.disabledColor,
+                              onPressed: () => setState(() => _qtdy++),
+                              icon: Icon(Icons.add),
+                            ),
                           ),
                         ],
                       ),
                     ),
                   ),
-                  SizedBox(width: 15),
-                  Expanded(
+                  SizedBox(width: 10),
+                  Flexible(
+                    flex: 2,
                     child: FlatButton(
-                      padding: EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 25, vertical: 20),
                       color: AppColors.primaryColor,
-                      shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(10)),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(10)),
                       onPressed: () {
                         var pastel = Pastel(flavor: _flavor, qtdy: _qtdy);
                         var order = Order();
@@ -131,8 +167,16 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          Text("Enviar", style: AppTextTheme.of(context).textLarge.copyWith(color: AppColors.negativeTextColor)),
-                          Text("R\$ ${_qtdy * _flavor.value}", style: AppTextTheme.of(context).textLarge.copyWith(color: AppColors.negativeTextColor)),
+                          Text("Enviar",
+                              style: AppTextTheme.of(context)
+                                  .textLarge
+                                  .copyWith(
+                                      color: AppColors.negativeTextColor)),
+                          Text("R\$ ${(_qtdy * _flavor.value).toStringAsFixed(2)}",
+                              style: AppTextTheme.of(context)
+                                  .textLarge
+                                  .copyWith(
+                                      color: AppColors.negativeTextColor)),
                         ],
                       ),
                     ),
