@@ -95,30 +95,35 @@ class _SelectItemPageState extends State<SelectItemPage> {
               child: Container(
                 decoration: BoxDecoration(border: Border(top: BorderSide(color: AppColors.separatorColor, width: 2))),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.all(20),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 20),
-                          child: Column(children: <Widget>[
-                            Align(alignment: Alignment.centerLeft, child: Text(flavors[index].name, maxLines: 1, style: AppTextTheme.of(context).textDefault)),
-                            SizedBox(height: 5),
-                            Align(alignment: Alignment.centerLeft, child: Text(flavors[index].ingredients, maxLines: 2, style: AppTextTheme.of(context).textDefault.copyWith(color: AppColors.secondaryTextColor))),
-                            SizedBox(height: 15),
-                            Align(alignment: Alignment.centerLeft, child: Text(flavors[index].valueInReal, style: AppTextTheme.of(context).textDefault)),
-                          ]),
-                        ),
+                        child: Column(children: <Widget>[
+                          Align(alignment: Alignment.centerLeft, child: Text(flavors[index].name, maxLines: 1, style: AppTextTheme.of(context).textDefault)),
+                          SizedBox(height: 5),
+                          Align(alignment: Alignment.centerLeft, child: Text(flavors[index].ingredients, maxLines: 2, style: AppTextTheme.of(context).textDefault.copyWith(color: AppColors.secondaryTextColor))),
+                          SizedBox(height: 15),
+                          Align(alignment: Alignment.centerLeft, child: Text(flavors[index].valueInReal, style: AppTextTheme.of(context).textDefault)),
+                        ]),
                       ),
                       ClipRRect(
-                          borderRadius: BorderRadius.all(Radius.elliptical(5, 10)),
-                          child: Image.network(
-                            flavors[index].flavorImageUrl,
-                            width: 150,
-                            height: 150,
-                          )),
+                          borderRadius: BorderRadius.circular(10),
+                          child: Container(
+                            padding: EdgeInsets.all(1),
+                            child: Align(
+                              widthFactor: .8,
+                              heightFactor: .9,
+                              child: Image.network(
+                                flavors[index].flavorImageUrl,
+//                                width: 150,
+//                                height: 150,
+                              ),
+                            ),
+                          ),
+                      ),
                     ],
                   ),
                 ),
