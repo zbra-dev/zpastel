@@ -9,6 +9,8 @@ import 'package:zpastel/ui/helpers/AppBarBuilder.dart';
 import 'package:zpastel/ui/styles/AppTextTheme.dart';
 import 'package:zpastel/ui/styles/app-colors.dart';
 
+import 'mediators/NavigatorMediator.dart';
+
 class ItemDetailPage extends StatefulWidget {
   Flavor flavor;
 
@@ -20,9 +22,11 @@ class ItemDetailPage extends StatefulWidget {
 
 class _ItemDetailPageState extends State<ItemDetailPage> {
   final OrderService _orderService = OrderService();
+  final NavigationMediator _navigationMediator = NavigationMediator();
   Flavor _flavor;
   String _extraInformation = "";
   int _qtdy = 1;
+  var _order = Order();
 
   _ItemDetailPageState(this._flavor) : super();
 
@@ -132,16 +136,26 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                       shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(10)),
                       onPressed: () {
                         var pastel = Pastel(flavor: _flavor, qtdy: _qtdy);
-                        var order = Order();
-                        order.items.add(pastel);
-                        _orderService.doOrder(order);
+                        _order.items.add(pastel);
+                        _orderService.doOrder(_order);
                       },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text("Enviar", style: AppTextTheme.of(context).textLarge.copyWith(color: AppColors.negativeTextColor)),
-                          Text("R\$ ${(_qtdy * _flavor.value).toStringAsFixed(2)}", style: AppTextTheme.of(context).textLarge.copyWith(color: AppColors.negativeTextColor)),
-                        ],
+                      child: FlatButton(
+                        onPressed: () => _navigationMediator.openReviewOrder(context, _order),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Text("Enviar",
+                                style: AppTextTheme.of(context)
+                                    .textLarge
+                                    .copyWith(
+                                        color: AppColors.negativeTextColor)),
+                            Text("R\$ ${(_qtdy * _flavor.value).toStringAsFixed(2)}",
+                                style: AppTextTheme.of(context)
+                                    .textLarge
+                                    .copyWith(
+                                        color: AppColors.negativeTextColor)),
+                          ],
+                        ),
                       ),
                     ),
                   )

@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:zpastel/model/Flavor.dart';
+import 'package:zpastel/model/Order.dart';
 import 'package:zpastel/ui/ItemDetailPage.dart';
 import 'package:zpastel/ui/PageRoutes.dart';
+
+import '../ReviewOrderPage.dart';
 
 class NavigationMediator {
   void popToRootPage(BuildContext context) {
@@ -28,5 +31,9 @@ class NavigationMediator {
 
   void openItemDetail(BuildContext context, Flavor flavor) {
     Navigator.push(context, new MaterialPageRoute(builder: (BuildContext context) => ItemDetailPage(flavor: flavor)));
+  }
+
+  void openReviewOrder(BuildContext context, Order order) {
+    Navigator.push(context, new MaterialPageRoute(builder: (BuildContext context) => ReviewOrderPage(order: order)));
   }
 }
