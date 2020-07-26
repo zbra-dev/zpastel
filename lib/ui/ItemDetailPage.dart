@@ -25,6 +25,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
   final OrderService _orderService = OrderService();
   final NavigationMediator _navigationMediator = NavigationMediator();
 
+  final NavigationMediator _navigationMediator = NavigationMediator();
   Flavor _flavor;
   Order _currentOrder;
   String _extraInformation = "";

@@ -6,6 +6,8 @@ import 'package:zpastel/model/Order.dart';
 import 'package:zpastel/ui/ItemDetailPage.dart';
 import 'package:zpastel/ui/PageRoutes.dart';
 
+import '../ReviewOrderPage.dart';
+
 class NavigationMediator {
   void popToRootPage(BuildContext context) {
     Navigator.of(context).popUntil((r) => r.isFirst);
@@ -33,5 +35,9 @@ class NavigationMediator {
 
   void openCart(BuildContext context, Order currentOrder) {
     Navigator.of(context).pushNamed(PageRoutes.Cart);
+  }
+
+  void openReviewOrder(BuildContext context, Order order) {
+    Navigator.push(context, new MaterialPageRoute(builder: (BuildContext context) => ReviewOrderPage(order: order)));
   }
 }
