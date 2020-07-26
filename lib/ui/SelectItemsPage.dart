@@ -58,11 +58,11 @@ class _SelectItemPageState extends State<SelectItemPage> {
                         alignment: Alignment.centerLeft,
                         child: Row(
                           children: <Widget>[
-                            Text("Encomende seu pastel com o", style: AppTextTheme.of(context).textDefaultLight.copyWith(color: AppColors.secondaryNegativeTextColor)),
+                            Text("Encomende seu pastel com o", style: AppTextTheme.of(context).textDefault.copyWith(color: AppColors.secondaryNegativeTextColor)),
                             SizedBox(width: 3),
-                            Text("Fernandes", style: AppTextTheme.of(context).textDefault.copyWith(color: AppColors.secondaryNegativeTextColor)),
+                            Text("Fernandes", style: AppTextTheme.of(context).textDefaultBold.copyWith(color: AppColors.secondaryNegativeTextColor)),
                             SizedBox(width: 3),
-                            Text("abaixo", style: AppTextTheme.of(context).textDefaultLight.copyWith(color: AppColors.secondaryNegativeTextColor)),
+                            Text("abaixo", style: AppTextTheme.of(context).textDefault.copyWith(color: AppColors.secondaryNegativeTextColor)),
                           ],
                         ),
                       ),
