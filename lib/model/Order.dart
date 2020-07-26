@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-
 import 'package:zpastel/model/StorableEntity.dart';
 
 import 'Item.dart';
@@ -7,11 +6,9 @@ import 'Item.dart';
 part 'Order.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class Order implements StorableEntity{
-
+class Order implements StorableEntity {
   @override
   String id;
-  String userId;
   @JsonKey(ignore: true)
   List<Item> items = [];
 
@@ -30,4 +27,9 @@ class Order implements StorableEntity{
 
   @override
   Map<String, dynamic> toJson() => _$OrderToJson(this);
+
+  void addItem(Item item) {
+    item.orderId = id;
+    items.add(item);
+  }
 }

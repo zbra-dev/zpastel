@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zpastel/model/Flavor.dart';
+import 'package:zpastel/model/Order.dart';
 import 'package:zpastel/services/OrderService.dart';
 import 'package:zpastel/ui/helpers/AppBarBuilder.dart';
 import 'package:zpastel/ui/mediators/NavigatorMediator.dart';
@@ -16,6 +17,11 @@ class _SelectItemPageState extends State<SelectItemPage> {
   final NavigationMediator _navigationMediator = NavigationMediator();
 
   List<Flavor> flavors = [];
+  Order _currentOrder;
+
+  _SelectItemPageState(){
+    _currentOrder = Order();
+  }
 
   @override
   void initState() {
@@ -91,7 +97,7 @@ class _SelectItemPageState extends State<SelectItemPage> {
           scrollDirection: Axis.vertical,
           children: List.generate(flavors.length, (index) {
             return GestureDetector(
-              onTap: () => _navigationMediator.openItemDetail(context, flavors[index]),
+              onTap: () => _navigationMediator.openItemDetail(context, flavors[index], _currentOrder),
               child: Container(
                 decoration: BoxDecoration(border: Border(top: BorderSide(color: AppColors.separatorColor, width: 2))),
                 child: Padding(

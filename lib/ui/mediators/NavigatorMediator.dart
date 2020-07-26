@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:zpastel/model/Flavor.dart';
+import 'package:zpastel/model/Order.dart';
 import 'package:zpastel/ui/ItemDetailPage.dart';
 import 'package:zpastel/ui/PageRoutes.dart';
 
@@ -26,7 +27,11 @@ class NavigationMediator {
     Navigator.of(context).pushNamed(PageRoutes.SelectItems);
   }
 
-  void openItemDetail(BuildContext context, Flavor flavor) {
-    Navigator.push(context, new MaterialPageRoute(builder: (BuildContext context) => ItemDetailPage(flavor: flavor)));
+  void openItemDetail(BuildContext context, Flavor flavor, Order currentOrder) {
+    Navigator.push(context, new MaterialPageRoute(builder: (BuildContext context) => ItemDetailPage(flavor: flavor, currentOrder: currentOrder)));
+  }
+
+  void openCart(BuildContext context, Order currentOrder) {
+    Navigator.of(context).pushNamed(PageRoutes.Cart);
   }
 }

@@ -9,22 +9,28 @@ import 'package:zpastel/ui/helpers/AppBarBuilder.dart';
 import 'package:zpastel/ui/styles/AppTextTheme.dart';
 import 'package:zpastel/ui/styles/app-colors.dart';
 
+import 'mediators/NavigatorMediator.dart';
+
 class ItemDetailPage extends StatefulWidget {
   Flavor flavor;
+  Order currentOrder;
 
   @override
-  _ItemDetailPageState createState() => _ItemDetailPageState(flavor);
+  _ItemDetailPageState createState() => _ItemDetailPageState(flavor, currentOrder);
 
-  ItemDetailPage({Key key, @required this.flavor}) : super(key: key);
+  ItemDetailPage({Key key, @required this.flavor, @required this.currentOrder}) : super(key: key);
 }
 
 class _ItemDetailPageState extends State<ItemDetailPage> {
   final OrderService _orderService = OrderService();
+  final NavigationMediator _navigationMediator = NavigationMediator();
+
   Flavor _flavor;
+  Order _currentOrder;
   String _extraInformation = "";
   int _qtdy = 1;
 
-  _ItemDetailPageState(this._flavor) : super();
+  _ItemDetailPageState(this._flavor, this._currentOrder) : super();
 
   @override
   Widget build(BuildContext context) {
@@ -131,10 +137,8 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                       color: AppColors.primaryColor,
                       shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(10)),
                       onPressed: () {
-                        var pastel = Pastel(flavor: _flavor, qtdy: _qtdy);
-                        var order = Order();
-                        order.items.add(pastel);
-                        _orderService.doOrder(order);
+                        _currentOrder.addItem(Pastel(flavor: _flavor, qtdy: _qtdy, extraInformation: _extraInformation));
+                        _navigationMediator.openCart(context, _currentOrder);
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

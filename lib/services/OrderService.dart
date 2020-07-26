@@ -1,5 +1,6 @@
 import 'package:zpastel/model/Flavor.dart';
 import 'package:zpastel/model/Order.dart';
+import 'package:zpastel/model/Pastel.dart';
 import 'package:zpastel/persistence/FlavorRepository.dart';
 
 class OrderService {
@@ -11,5 +12,9 @@ class OrderService {
 
   void doOrder(Order order) {
     // send message in Slack
+  }
+
+  void addItem(Pastel pastel) {
+
   }
 }
