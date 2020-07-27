@@ -44,7 +44,7 @@ class _SelectItemPageState extends State<SelectItemPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarBuilder().withMenu().withSearch().build(),
+      appBar: AppBarBuilder().withMenu().withLogout().build(),
       body: SafeArea(
         child: Column(
           children: <Widget>[
