@@ -1,6 +1,6 @@
-import 'StorableEntity.dart';
-
 import 'package:json_annotation/json_annotation.dart';
+
+import 'StorableEntity.dart';
 
 part 'User.g.dart';
 
@@ -18,7 +18,6 @@ class User implements StorableEntity {
   DateTime lastModifiedOn;
 
   String email;
-  String mlId;
   String photoUrl;
   String name;
 
