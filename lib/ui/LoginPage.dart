@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:zpastel/services/AuthenticationService.dart';
 import 'package:zpastel/ui/helpers/BuildContextExtension.dart';
 import 'package:zpastel/ui/mediators/NavigatorMediator.dart';
 import 'package:zpastel/ui/styles/AppTextTheme.dart';
@@ -15,6 +16,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final NavigationMediator _navigationMediator = NavigationMediator();
+  final AuthenticationService _authService = AuthenticationService();
 
   @override
   void initState() {
@@ -56,15 +58,8 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     Container(
                       alignment: Alignment.center,
-                      height: context.heightSize(
-                          context.isPortraitOrientation() ? 45 : 75),
-                      padding: EdgeInsets.only(
-                          top: context.heightSize(
-                              context.isPortraitOrientation() ? 8 : 4),
-                          right: context.widthSize(
-                              context.isPortraitOrientation() ? 10 : 4),
-                          left: context.widthSize(
-                              context.isPortraitOrientation() ? 10 : 4)),
+                      height: context.heightSize(context.isPortraitOrientation() ? 45 : 75),
+                      padding: EdgeInsets.only(top: context.heightSize(context.isPortraitOrientation() ? 8 : 4), right: context.widthSize(context.isPortraitOrientation() ? 10 : 4), left: context.widthSize(context.isPortraitOrientation() ? 10 : 4)),
                       decoration: BoxDecoration(
                         color: AppColors.white,
                         borderRadius: BorderRadius.only(
@@ -83,60 +78,39 @@ class _LoginPageState extends State<LoginPage> {
                           Text(
                             "Selecione como deseja entrar",
                             textAlign: TextAlign.center,
-                            style: AppTextTheme.of(context)
-                                .textSmall
-                                .copyWith(color: AppColors.secondaryTextColor),
+                            style: AppTextTheme.of(context).textSmall.copyWith(color: AppColors.secondaryTextColor),
                           ),
                           SizedBox(height: context.heightSize(5)),
                           Expanded(
-                            child: Column(
-                                mainAxisAlignment:
-                                    context.isPortraitOrientation()
-                                        ? MainAxisAlignment.start
-                                        : MainAxisAlignment.center,
-                                children: <Widget>[
-                                  SizedBox(
-                                    width: context.widthSize(85),
-                                    height: 56,
-                                    child: RaisedButton(
-                                      child: Text(
-                                        "Entrar com Slack",
-                                        textAlign: TextAlign.center,
-                                        style: AppTextTheme.of(context)
-                                            .textDefaultBold
-                                            .copyWith(
-                                                fontSize: 16,
-                                                color: AppColors.red),
-                                      ),
-                                      color: AppColors.white,
-                                      elevation:
-                                          ButtonFactory.defaultElevation(),
-                                      shape: ButtonFactory.defaultBorderShape(),
-                                      onPressed: () async {
-//                                        await _doSignInWithGoogle();
-                                      },
-                                    ),
+                            child: Column(mainAxisAlignment: context.isPortraitOrientation() ? MainAxisAlignment.start : MainAxisAlignment.center, children: <Widget>[
+                              SizedBox(height: 20),
+                              RaisedButton(
+                                child: Text(
+                                  "Entrar com Google",
+                                  style: AppTextTheme.of(context).textDefaultBold.copyWith(color: AppColors.negativeTextColor),
+                                ),
+                                color: AppColors.primaryColor,
+                                elevation: 5,
+                                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
+                                shape: ButtonFactory.defaultBorderShape(),
+                                onPressed: () async => await _doSignInWithGoogle(),
+                              ),
+                              SizedBox(height: 20),
+                              SizedBox(
+                                width: context.widthSize(85),
+                                height: 56,
+                                child: FlatButton(
+                                  child: Text(
+                                    "Entrar com E-mail",
+                                    textAlign: TextAlign.center,
+                                    style: AppTextTheme.of(context).textDefaultBold.copyWith(fontSize: 16, color: AppColors.gray4),
                                   ),
-                                  SizedBox(height: 40),
-                                  SizedBox(
-                                    width: context.widthSize(85),
-                                    height: 56,
-                                    child: FlatButton(
-                                      child: Text(
-                                        "Entrar com E-mail",
-                                        textAlign: TextAlign.center,
-                                        style: AppTextTheme.of(context)
-                                            .textDefaultBold
-                                            .copyWith(
-                                                fontSize: 16,
-                                                color: AppColors.gray4),
-                                      ),
-                                      onPressed: () async {
-                                        await _doSignInWithSlack();
-                                      },
-                                    ),
-                                  )
-                                ]),
+                                  onPressed: () async {
+                                    await _doSignInWithSlack();
+                                  },
+                                ),
+                              )
+                            ]),
                           ),
                         ],
                       ),
@@ -149,5 +123,13 @@ class _LoginPageState extends State<LoginPage> {
         ],
       ),
     );
+  }
+
+  _doSignInWithGoogle() async {
+    var user = await _authService.signInWithGoogle();
+    if (user != null) {
+      print("[LoginPage] user autenticated in google: ${user.id}");
+      _navigationMediator.openHome(context);
+    }
   }
 }
