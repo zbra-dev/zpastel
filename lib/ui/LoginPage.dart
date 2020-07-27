@@ -28,6 +28,14 @@ class _LoginPageState extends State<LoginPage> {
     _navigationMediator.openHome(context);
   }
 
+  _doSignInWithGoogle() async {
+    var user = await _authService.signInWithGoogle();
+    if (user != null) {
+      print("[LoginPage] user autenticated in google: ${user.id}");
+      _navigationMediator.openHome(context);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,7 +114,7 @@ class _LoginPageState extends State<LoginPage> {
                                     style: AppTextTheme.of(context).textDefaultBold.copyWith(fontSize: 16, color: AppColors.gray4),
                                   ),
                                   onPressed: () async {
-                                    await _doSignInWithSlack();
+                                    await _navigationMediator.openManualSignIn(context);
                                   },
                                 ),
                               )
@@ -125,11 +133,4 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  _doSignInWithGoogle() async {
-    var user = await _authService.signInWithGoogle();
-    if (user != null) {
-      print("[LoginPage] user autenticated in google: ${user.id}");
-      _navigationMediator.openHome(context);
-    }
-  }
 }

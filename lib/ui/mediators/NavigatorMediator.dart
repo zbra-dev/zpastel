@@ -36,4 +36,8 @@ class NavigationMediator {
   void openReviewOrder(BuildContext context, Order order) {
     Navigator.push(context, new MaterialPageRoute(builder: (BuildContext context) => ReviewOrderPage(currentOrder: order)));
   }
+
+  openManualSignIn(BuildContext context) {
+    Navigator.of(context).pushNamed(PageRoutes.ManualSignIn);
+  }
 }
