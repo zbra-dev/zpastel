@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         title: 'Z Pastel',
         theme: ThemeFactory().buildTheme(),
         routes: PageRoutes.build(context),
-        initialRoute: PageRoutes.Login,
+        initialRoute: PageRoutes.Base,
       ),
     );
   }
