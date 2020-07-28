@@ -40,4 +40,8 @@ class NavigationMediator {
   openManualSignIn(BuildContext context) {
     Navigator.of(context).pushNamed(PageRoutes.ManualSignIn);
   }
+
+  void openCreateUser(BuildContext context) {
+    Navigator.of(context).pushNamed(PageRoutes.CreateUser);
+  }
 }

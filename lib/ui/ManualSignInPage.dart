@@ -34,9 +34,9 @@ class _ManualSignInPageState extends State<ManualSignInPage> {
     }
   }
 
-  void _doLogin() {}
-
-  void _createAccount() {}
+  void _createAccount() {
+    _navigationMediator.openCreateUser(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +61,7 @@ class _ManualSignInPageState extends State<ManualSignInPage> {
                     SizedBox(height: 20),
                     Container(
                       alignment: Alignment.center,
-                      height: context.heightSize(context.isPortraitOrientation() ? 65 : 75),
+                      height: context.heightSize(context.isPortraitOrientation() ? 55 : 75),
                       padding: EdgeInsets.only(
                         top: context.heightSize(context.isPortraitOrientation() ? 5 : 4),
                         right: context.widthSize(context.isPortraitOrientation() ? 10 : 4),
@@ -136,12 +136,12 @@ class _ManualSignInPageState extends State<ManualSignInPage> {
                               elevation: ButtonFactory.defaultElevation(),
                               padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                               shape: ButtonFactory.defaultBorderShape(),
-                              onPressed: () => _doLogin(),
+                              onPressed: () => _doManualSignIn(),
                             ),
                           ),
                           SizedBox(height: 20),
                           FlatButton(
-                            child: Text("Criar conta", style: AppTextTheme.of(context).textDefaultBold.copyWith(color: AppColors.textColor)),
+                            child: Text("Criar conta", style: AppTextTheme.of(context).textDefaultBold.copyWith(color: AppColors.secondaryTextColor)),
                             padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                             shape: ButtonFactory.borderlessShape(),
                             onPressed: () => _createAccount(),

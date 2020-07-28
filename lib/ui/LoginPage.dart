@@ -111,7 +111,7 @@ class _LoginPageState extends State<LoginPage> {
                                   child: Text(
                                     "Entrar com E-mail",
                                     textAlign: TextAlign.center,
-                                    style: AppTextTheme.of(context).textDefaultBold.copyWith(fontSize: 16, color: AppColors.gray4),
+                                    style: AppTextTheme.of(context).textDefaultBold.copyWith(color: AppColors.secondaryTextColor),
                                   ),
                                   onPressed: () async {
                                     await _navigationMediator.openManualSignIn(context);
