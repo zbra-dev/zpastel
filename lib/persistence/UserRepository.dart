@@ -23,6 +23,17 @@ class UserRepository {
     }
   }
 
+
+  Future<User> createUser(String email, String password) async {
+    try {
+      var result = await _firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
+      return result != null && result.user != null ? _convertFrom(result.user) : null;
+    } catch (e) {
+      //TODO: thrown an error
+      return null;
+    }
+  }
+
   Future<void> signOut() async {
     try {
       return await _firebaseAuth.signOut();
