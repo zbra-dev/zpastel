@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'StorableEntity.dart';
@@ -14,7 +15,7 @@ class Flavor implements StorableEntity {
   double value; // todo: improve this
   String flavorImageUrl;
 
-  String get valueInReal => "R\$ $value";
+  String get valueInReal => new NumberFormat("R\$ #,##0.00", "pt_BR").format(value);
 
   @override
   String createdById;

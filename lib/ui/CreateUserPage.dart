@@ -20,8 +20,10 @@ class _CreateUserPageState extends State<CreateUserPage> {
 
   String _email = '';
   String _password = '';
+  String _name = '';
 
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
 
   @override
   void initState() {
@@ -33,9 +35,9 @@ class _CreateUserPageState extends State<CreateUserPage> {
     if (state.validate()) {
       state.save();
 
-      var user = await _authService.signIn(_email, _password);
+      var user = await _authService.createUser(_email, _password, _name);
       if (user != null) {
-        print("[LoginPage] user autenticated in google: ${user.id}");
+        print("[LoginPage] user created manually: ${user.id}");
         _navigationMediator.openHome(context);
       }
     }
@@ -65,7 +67,7 @@ class _CreateUserPageState extends State<CreateUserPage> {
               SizedBox(height: 20),
               Container(
                 alignment: Alignment.center,
-                height: context.heightSize(context.isPortraitOrientation() ? 50 : 75),
+                height: context.heightSize(context.isPortraitOrientation() ? 60 : 75),
                 padding: EdgeInsets.only(
                   top: context.heightSize(context.isPortraitOrientation() ? 5 : 4),
                   right: context.widthSize(context.isPortraitOrientation() ? 10 : 4),
@@ -101,6 +103,25 @@ class _CreateUserPageState extends State<CreateUserPage> {
                       SizedBox(height: 30.0),
                       TextFormField(
                         decoration: const InputDecoration(
+                          labelText: 'Nome',
+                          labelStyle: TextStyle(color: Color.fromRGBO(90, 90, 90, 1)),
+                          suffixIcon: Icon(Icons.person_outline, color: Color.fromRGBO(90, 90, 90, 1)),
+                          border: OutlineInputBorder(),
+                          focusedBorder: const OutlineInputBorder(borderSide: BorderSide(color: Color.fromRGBO(90, 90, 90, 1))),
+                          focusColor: Color.fromRGBO(90, 90, 90, 1),
+                        ),
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Informe o nome';
+                          }
+                          return null;
+                        },
+                        onChanged: (val) => setState(() => _name = val),
+                        keyboardType: TextInputType.emailAddress,
+                      ),
+                      SizedBox(height: 20),
+                      TextFormField(
+                        decoration: const InputDecoration(
                           labelText: 'E-mail',
                           labelStyle: TextStyle(color: Color.fromRGBO(90, 90, 90, 1)),
                           suffixIcon: Icon(Icons.person_outline, color: Color.fromRGBO(90, 90, 90, 1)),
@@ -117,7 +138,7 @@ class _CreateUserPageState extends State<CreateUserPage> {
                         onChanged: (val) => setState(() => _email = val),
                         keyboardType: TextInputType.emailAddress,
                       ),
-                      SizedBox(height: 30),
+                      SizedBox(height: 20),
                       TextFormField(
                         decoration: const InputDecoration(
                           focusedBorder: const OutlineInputBorder(borderSide: BorderSide(color: Color.fromRGBO(90, 90, 90, 1))),

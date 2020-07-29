@@ -37,6 +37,7 @@ dependencies:
 
   #official flutter libs
   google_sign_in: ^4.1.1
+  intl: ^0.16.1
 
   # official flutter libs
   provider: ^4.0.1

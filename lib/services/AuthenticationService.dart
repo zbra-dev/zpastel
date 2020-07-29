@@ -2,7 +2,7 @@ import 'package:zpastel/gateway/AppContextGateway.dart';
 import 'package:zpastel/model/User.dart';
 import 'package:zpastel/persistence/UserRepository.dart';
 
-class AuthenticationService{
+class AuthenticationService {
   final UserRepository _userRepository = UserRepository();
   final AppContextGateway _appContextGateway = AppContextGateway();
 
@@ -12,6 +12,15 @@ class AuthenticationService{
 
   Future<User> signIn(String username, String password) async {
     var user = await _userRepository.signIn(username, password);
+    await _reconnectOrCreateUser(user);
+    return user;
+  }
+
+  Future<User> createUser(String username, String password, String name) async {
+    var user = await _userRepository.createUserLogin(username, password);
+    if (user != null) {
+      user.name = name;
+    }
     await _reconnectOrCreateUser(user);
     return user;
   }

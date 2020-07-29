@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:zpastel/model/Flavor.dart';
 import 'package:zpastel/model/Order.dart';
+import 'package:zpastel/services/AuthenticationService.dart';
 import 'package:zpastel/services/OrderService.dart';
 import 'package:zpastel/ui/helpers/AppBarBuilder.dart';
 import 'package:zpastel/ui/mediators/NavigatorMediator.dart';
 import 'package:zpastel/ui/styles/AppTextTheme.dart';
 import 'package:zpastel/ui/styles/app-colors.dart';
+
+import 'utils/StringUtils.dart';
 
 class SelectItemPage extends StatefulWidget {
   @override
@@ -14,24 +17,33 @@ class SelectItemPage extends StatefulWidget {
 
 class _SelectItemPageState extends State<SelectItemPage> {
   final OrderService _orderService = OrderService();
+  final AuthenticationService _authenticationService = AuthenticationService();
   final NavigationMediator _navigationMediator = NavigationMediator();
 
   List<Flavor> flavors = [];
   Order _currentOrder;
+  String _username = '';
 
-  _SelectItemPageState(){
+  _SelectItemPageState() {
     _currentOrder = Order();
   }
 
   @override
   void initState() {
     super.initState();
+    _loadUser();
     _loadFlavors();
+  }
+
+  void _loadUser() async {
+    var user = await _authenticationService.user.first;
+    this._username = StringUtils.capitalize(user.name ?? user.email);
   }
 
   void _loadFlavors() async {
     try {
       var flavors = await _orderService.findAll();
+      flavors.sort((q1, q2) => q1.name.compareTo(q2.name));
       setState(() {
         this.flavors = flavors;
       });
@@ -58,7 +70,7 @@ class _SelectItemPageState extends State<SelectItemPage> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
                       Align(alignment: Alignment.centerLeft, child: Text("Bem vindo ao", style: AppTextTheme.of(context).textLargerBold.copyWith(color: AppColors.negativeTextColor))),
-                      Align(alignment: Alignment.centerLeft, child: Text("ZPastel", style: AppTextTheme.of(context).textLargerBold.copyWith(color: AppColors.negativeTextColor))),
+                      Align(alignment: Alignment.centerLeft, child: Text("ZPastel, $_username", style: AppTextTheme.of(context).textLargerBold.copyWith(color: AppColors.negativeTextColor))),
                       SizedBox(height: 10),
                       Align(
                         alignment: Alignment.centerLeft,
@@ -116,19 +128,20 @@ class _SelectItemPageState extends State<SelectItemPage> {
                         ]),
                       ),
                       ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Container(
-                            padding: EdgeInsets.all(1),
-                            child: Align(
-                              widthFactor: .8,
-                              heightFactor: .9,
-                              child: Image.network(
-                                flavors[index].flavorImageUrl,
+                        borderRadius: BorderRadius.circular(10),
+                        child: Container(
+                          padding: EdgeInsets.all(1),
+                          child: Align(
+                            widthFactor: .8,
+                            heightFactor: .9,
+                            child: Image.network(
+                              flavors[index].flavorImageUrl,
+                              fit: BoxFit.cover,
 //                                width: 150,
 //                                height: 150,
-                              ),
                             ),
                           ),
+                        ),
                       ),
                     ],
                   ),

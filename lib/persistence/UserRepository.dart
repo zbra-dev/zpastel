@@ -24,7 +24,7 @@ class UserRepository {
   }
 
 
-  Future<User> createUser(String email, String password) async {
+  Future<User> createUserLogin(String email, String password) async {
     try {
       var result = await _firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
       return result != null && result.user != null ? _convertFrom(result.user) : null;

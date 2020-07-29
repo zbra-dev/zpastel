@@ -9,7 +9,7 @@ class FlavorConverter extends StorableEntityConverter<Flavor> {
   void convertSpecificFields(Flavor flavor, Map<String, dynamic> data) {
     flavor.ingredients = data['ingredients'];
     flavor.name = data['name'];
-    flavor.value = data['value'] ?? 0;
+    flavor.value = data['value'] is int ? data['value'] + 0.0 : data['value'];
     flavor.flavorImageUrl = data['flavorImageUrl'];
   }
 }
