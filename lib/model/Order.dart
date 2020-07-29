@@ -12,6 +12,8 @@ class Order implements StorableEntity {
   @JsonKey(ignore: true)
   List<Item> items = [];
 
+  String createdByUsername;
+
   @override
   String createdById;
   @override
