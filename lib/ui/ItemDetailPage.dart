@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:zpastel/model/Flavor.dart';
+import 'package:zpastel/model/Item.dart';
 import 'package:zpastel/model/Order.dart';
 import 'package:zpastel/model/Pastel.dart';
 import 'package:zpastel/services/OrderService.dart';
@@ -137,7 +138,14 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                       color: AppColors.primaryColor,
                       shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(10)),
                       onPressed: () {
-                        var item = _currentOrder.items.firstWhere((item) => item.flavor.id == _flavor.id);
+                        Item item = null;
+                        if (_currentOrder.items != null && _currentOrder.items.length > 0) {
+                          for (Item previousItem in _currentOrder.items) {
+                            if (previousItem.flavor.id == _flavor.id) {
+                              item = previousItem;
+                            }
+                          }
+                        }
                         if (item == null) {
                           _currentOrder.addItem(Pastel(flavor: _flavor, qtdy: _qtdy, extraInformation: _extraInformation));
                         } else {
