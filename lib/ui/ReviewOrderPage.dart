@@ -55,12 +55,7 @@ class _ReviewOrderPageState extends State<ReviewOrderPage> {
                           children: <Widget>[
                             Container(
                               width: context.widthSize(50),
-                              child: Text("Hora de revisar seu pedido",
-                                  style: AppTextTheme.of(context)
-                                      .textLargerBold
-                                      .copyWith(
-                                          fontSize: 25,
-                                          color: AppColors.white)),
+                              child: Text("Hora de revisar seu pedido", style: AppTextTheme.of(context).textLargerBold.copyWith(fontSize: 25, color: AppColors.white)),
                             ),
                             SizedBox(height: 20),
                             GridView.count(
@@ -68,10 +63,19 @@ class _ReviewOrderPageState extends State<ReviewOrderPage> {
                               childAspectRatio: 2.8,
                               mainAxisSpacing: 5,
                               crossAxisCount: 1,
-                              children:
-                                  List.generate(_order.items.length, (index) {
+                              children: List.generate(_order.items.length, (index) {
                                 return buildFlavorTotal(context, index);
                               }),
+                            ),
+                            SizedBox(height: 5),
+                            Container(
+                              decoration: BoxDecoration(border: Border(top: BorderSide(color: AppColors.gray7, width: 1, style: BorderStyle.solid), bottom: BorderSide(color: AppColors.gray7, width: 1, style: BorderStyle.solid))),
+                              child: Center(
+                                child: FlatButton(
+                                  onPressed: () => _navigationMediator.popToRootPage(context),
+                                  child: (Text("Adicione mais items", style: AppTextTheme.of(context).textDefault.copyWith(color: AppColors.primaryColor))),
+                                ),
+                              ),
                             )
                           ],
                         )),
@@ -83,16 +87,12 @@ class _ReviewOrderPageState extends State<ReviewOrderPage> {
                   child: Column(children: <Widget>[
                     Container(
                       height: 85,
-                      decoration: BoxDecoration(
-                          color: AppColors.gray8,
-                          borderRadius: BorderRadius.all(Radius.circular(5))),
+                      decoration: BoxDecoration(color: AppColors.gray8, borderRadius: BorderRadius.all(Radius.circular(5))),
                       child: Padding(
                           padding: EdgeInsets.all(25),
                           child: Text(
-                            "Assim que você fizer o pedido, o Fernandes vai receber tudo no Slack.",
-                            style: AppTextTheme.of(context)
-                                .textDefault
-                                .copyWith(fontSize: 15),
+                            "Assim que você fizer o pedido, o Fernandes vai receber tudo no Email.",
+                            style: AppTextTheme.of(context).textDefault.copyWith(fontSize: 15),
                             textAlign: TextAlign.justify,
                           )),
                     ),
@@ -100,11 +100,7 @@ class _ReviewOrderPageState extends State<ReviewOrderPage> {
                     Row(
                       children: <Widget>[
                         Expanded(child: Text("Subtotal")),
-                        Expanded(
-                            child: Align(
-                                alignment: Alignment.centerRight,
-                                child: Text(
-                                    "R\$ ${_subTotal.toStringAsFixed(2)}")))
+                        Expanded(child: Align(alignment: Alignment.centerRight, child: Text("R\$ ${_subTotal.toStringAsFixed(2)}"))),
                       ],
                     ),
                     SizedBox(height: 10),
@@ -112,23 +108,13 @@ class _ReviewOrderPageState extends State<ReviewOrderPage> {
                       children: <Widget>[
                         Expanded(child: Text("Taxa do Fernandes")),
                         Expanded(
-                          child: Align(
-                              alignment: Alignment.centerRight,
-                              child: Text(
-                                  "R\$ ${_fernandesTax.toStringAsFixed(2)}")),
+                          child: Align(alignment: Alignment.centerRight, child: Text("R\$ ${_fernandesTax.toStringAsFixed(2)}")),
                         )
                       ],
                     ),
                     SizedBox(height: 10),
                     Row(
-                      children: <Widget>[
-                        Expanded(child: Text("Total")),
-                        Expanded(
-                            child: Align(
-                                alignment: Alignment.centerRight,
-                                child: Text(
-                                    "R\$ ${(_subTotal + _fernandesTax).toStringAsFixed(2)}")))
-                      ],
+                      children: <Widget>[Expanded(child: Text("Total")), Expanded(child: Align(alignment: Alignment.centerRight, child: Text("R\$ ${(_subTotal + _fernandesTax).toStringAsFixed(2)}")))],
                     ),
                   ]),
                 ),
@@ -144,10 +130,7 @@ class _ReviewOrderPageState extends State<ReviewOrderPage> {
                         _order.items.clear();
                         _navigationMediator.popToRootPage(context);
                       },
-                      child: Text("Vai Fernandes",
-                          style: AppTextTheme.of(context)
-                              .textDefaultBold
-                              .copyWith(fontSize: 16, color: AppColors.white)),
+                      child: Text("Vai Fernandes", style: AppTextTheme.of(context).textDefaultBold.copyWith(fontSize: 16, color: AppColors.white)),
                     ),
                   ),
                 )
@@ -169,16 +152,7 @@ class _ReviewOrderPageState extends State<ReviewOrderPage> {
     final item = _order.items[index];
     return Container(
       padding: EdgeInsets.all(20),
-      decoration: BoxDecoration(
-          color: AppColors.white,
-          borderRadius: BorderRadius.all(Radius.circular(16)),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.16),
-              blurRadius: 6,
-              offset: Offset(0, 3),
-            )
-          ]),
+      decoration: BoxDecoration(color: AppColors.white, borderRadius: BorderRadius.all(Radius.circular(16)), boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.16), blurRadius: 6, offset: Offset(0, 3))]),
 //      width: context.widthSize(100),
       child: Row(
         children: <Widget>[
@@ -190,18 +164,12 @@ class _ReviewOrderPageState extends State<ReviewOrderPage> {
                   alignment: Alignment.centerLeft,
                   child: Text(
                     "${item.qtdy}x ${item.flavor.name}",
-                    style: AppTextTheme.of(context)
-                        .textDefaultBold
-                        .copyWith(fontSize: 17),
+                    style: AppTextTheme.of(context).textDefaultBold.copyWith(fontSize: 17),
                   ),
                 ),
                 SizedBox(height: 10),
                 //TODO: Fix me
-                Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text("Obs:",
-                        style: AppTextTheme.of(context).textDefault.copyWith(
-                            fontSize: 13, color: AppColors.secondaryTextColor)))
+                Align(alignment: Alignment.centerLeft, child: Text("Obs:", style: AppTextTheme.of(context).textDefault.copyWith(fontSize: 13, color: AppColors.secondaryTextColor)))
               ],
             ),
           ),
@@ -214,8 +182,10 @@ class _ReviewOrderPageState extends State<ReviewOrderPage> {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
-                  Text("R\$ ${item.flavor.value.toStringAsFixed(2)}", style: AppTextTheme.of(context).textDefault.copyWith(
-              fontSize: 15),),
+                  Text(
+                    "R\$ ${item.flavor.value.toStringAsFixed(2)}",
+                    style: AppTextTheme.of(context).textDefault.copyWith(fontSize: 15),
+                  ),
                   SizedBox(height: 10),
                   IconButton(
                     onPressed: () {
@@ -223,9 +193,7 @@ class _ReviewOrderPageState extends State<ReviewOrderPage> {
                       if (_order.items.isEmpty) {
                         _navigationMediator.popToRootPage(context);
                       } else {
-                        setState(() {
-
-                        });
+                        setState(() {});
                       }
                     },
                     icon: Icon(
