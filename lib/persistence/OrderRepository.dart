@@ -11,6 +11,6 @@ class OrderRepository {
   }
 
   Future<void> save(order) async {
-    await _store.save(order);
+    return await _store.save(order);
   }
 }

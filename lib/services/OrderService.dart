@@ -13,7 +13,7 @@ class OrderService {
   }
 
   Future doOrder(Order order) async {
-    _orderRepository.save(order);
+    return await _orderRepository.save(order);
   }
 
   void addItem(Pastel pastel) {
