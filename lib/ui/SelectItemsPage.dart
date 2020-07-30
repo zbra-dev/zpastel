@@ -38,6 +38,7 @@ class _SelectItemPageState extends State<SelectItemPage> {
   void _loadUser() async {
     var user = await _authenticationService.user.first;
     this._username = StringUtils.capitalize(user.name ?? user.email);
+    _currentOrder.createdByUsername = _username;
   }
 
   void _loadFlavors() async {
