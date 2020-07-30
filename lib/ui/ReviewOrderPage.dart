@@ -42,83 +42,86 @@ class _ReviewOrderPageState extends State<ReviewOrderPage> {
       body: SafeArea(
         child: Stack(
           children: <Widget>[
-            SingleChildScrollView(
-              physics: ScrollPhysics(),
-              child: Column(
-                children: <Widget>[
-                  Stack(
-                    children: <Widget>[
-                      Container(height: 200, color: AppColors.primaryColor),
-                      Padding(
-                          padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Container(
-                                width: context.widthSize(50),
-                                child: Text("Hora de revisar seu pedido", style: AppTextTheme.of(context).textLargerBold.copyWith(fontSize: 25, color: AppColors.white)),
-                              ),
-                              SizedBox(height: 20),
-                              SizedBox(height: 20),
-                              GridView.count(
-                                shrinkWrap: true,
-                                childAspectRatio: 2.8,
-                                mainAxisSpacing: 5,
-                                crossAxisCount: 1,
-                                children: List.generate(_order.items.length, (index) {
-                                  return buildFlavorTotal(context, index);
-                                }),
-                              ),
-                              SizedBox(height: 5),
-                              Container(
-                                decoration: BoxDecoration(border: Border(top: BorderSide(color: AppColors.gray7, width: 1, style: BorderStyle.solid), bottom: BorderSide(color: AppColors.gray7, width: 1, style: BorderStyle.solid))),
-                                child: Center(
-                                  child: FlatButton(
-                                    onPressed: () => _navigationMediator.popToRootPage(context),
-                                    child: (Text("Adicione mais items", style: AppTextTheme.of(context).textDefault.copyWith(color: AppColors.primaryColor))),
-                                  ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(0, 0, 0, 75),
+              child: SingleChildScrollView(
+                physics: ScrollPhysics(),
+                child: Column(
+                  children: <Widget>[
+                    Stack(
+                      children: <Widget>[
+                        Container(height: 200, color: AppColors.primaryColor),
+                        Padding(
+                            padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Container(
+                                  width: context.widthSize(50),
+                                  child: Text("Hora de revisar seu pedido", style: AppTextTheme.of(context).textLargerBold.copyWith(fontSize: 25, color: AppColors.white)),
                                 ),
-                              )
-                            ],
-                          )),
-                    ],
-                  ),
-                  SizedBox(height: 50),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 100),
-                    child: Column(children: <Widget>[
-                      Container(
-                        height: 85,
-                        decoration: BoxDecoration(color: AppColors.gray8, borderRadius: BorderRadius.all(Radius.circular(5))),
-                        child: Padding(
-                            padding: EdgeInsets.all(25),
-                            child: Text(
-                              "Assim que você fizer o pedido, o Fernandes vai receber tudo no Email.",
-                              style: AppTextTheme.of(context).textDefault.copyWith(fontSize: 15),
-                              textAlign: TextAlign.justify,
+                                SizedBox(height: 20),
+                                SizedBox(height: 20),
+                                GridView.count(
+                                  shrinkWrap: true,
+                                  childAspectRatio: 2.8,
+                                  mainAxisSpacing: 5,
+                                  crossAxisCount: 1,
+                                  children: List.generate(_order.items.length, (index) {
+                                    return buildFlavorTotal(context, index);
+                                  }),
+                                ),
+                                SizedBox(height: 15),
+                                Container(
+                                  decoration: BoxDecoration(border: Border(top: BorderSide(color: AppColors.gray7, width: 1, style: BorderStyle.solid), bottom: BorderSide(color: AppColors.gray7, width: 1, style: BorderStyle.solid))),
+                                  child: Center(
+                                    child: FlatButton(
+                                      onPressed: () => _navigationMediator.popToRootPage(context),
+                                      child: (Text("Adicione mais items", style: AppTextTheme.of(context).textDefault.copyWith(color: AppColors.primaryColor))),
+                                    ),
+                                  ),
+                                )
+                              ],
                             )),
-                      ),
-                      SizedBox(height: 55),
-                      Row(
-                        children: <Widget>[
-                          Expanded(child: Text("Subtotal")),
-                          Expanded(child: Align(alignment: Alignment.centerRight, child: Text("R\$ ${_subTotal.toStringAsFixed(2)}"))),
-                        ],
-                      ),
-                      SizedBox(height: 10),
-                      Row(
-                        children: <Widget>[
-                          Expanded(child: Text("Taxa do Fernandes")),
-                          Expanded(child: Align(alignment: Alignment.centerRight, child: Text("R\$ ${_fernandesTax.toStringAsFixed(2)}"))),
-                        ],
-                      ),
-                      SizedBox(height: 10),
-                      Row(
-                        children: <Widget>[Expanded(child: Text("Total", style: AppTextTheme.of(context).textLargeBold)), Expanded(child: Align(alignment: Alignment.centerRight, child: Text("R\$ ${(_subTotal + _fernandesTax).toStringAsFixed(2)}", style: AppTextTheme.of(context).textLargeBold)))],
-                      ),
-                    ]),
-                  ),
-                ],
+                      ],
+                    ),
+                    SizedBox(height: 35),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 0, 20, 100),
+                      child: Column(children: <Widget>[
+                        Container(
+                          height: 85,
+                          decoration: BoxDecoration(color: AppColors.gray8, borderRadius: BorderRadius.all(Radius.circular(5))),
+                          child: Padding(
+                              padding: EdgeInsets.all(25),
+                              child: Text(
+                                "Assim que você fizer o pedido, o Fernandes vai receber tudo no Email.",
+                                style: AppTextTheme.of(context).textDefault.copyWith(fontSize: 15),
+                                textAlign: TextAlign.justify,
+                              )),
+                        ),
+                        SizedBox(height: 35),
+                        Row(
+                          children: <Widget>[
+                            Expanded(child: Text("Subtotal")),
+                            Expanded(child: Align(alignment: Alignment.centerRight, child: Text("R\$ ${_subTotal.toStringAsFixed(2)}"))),
+                          ],
+                        ),
+                        SizedBox(height: 10),
+                        Row(
+                          children: <Widget>[
+                            Expanded(child: Text("Taxa do Fernandes")),
+                            Expanded(child: Align(alignment: Alignment.centerRight, child: Text("R\$ ${_fernandesTax.toStringAsFixed(2)}"))),
+                          ],
+                        ),
+                        SizedBox(height: 10),
+                        Row(
+                          children: <Widget>[Expanded(child: Text("Total", style: AppTextTheme.of(context).textLargeBold)), Expanded(child: Align(alignment: Alignment.centerRight, child: Text("R\$ ${(_subTotal + _fernandesTax).toStringAsFixed(2)}", style: AppTextTheme.of(context).textLargeBold)))],
+                        ),
+                      ]),
+                    ),
+                  ],
+                ),
               ),
             ),
             Padding(
