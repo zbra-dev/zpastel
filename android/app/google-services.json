@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "590844832860-iql84rgsgdpk4k179ppgf113egg3r82t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.br.zbra.zpastel",
+            "certificate_hash": "c04a73b036f224b7d9d67c332f4ab03d3915bdb1"
+          }
+        },
+        {
           "client_id": "590844832860-brfiv2j3ohcpgcdsh1b1jkghdscn0dt8.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -38,6 +46,13 @@
             {
               "client_id": "590844832860-2h45se1fr7bqp9gigd0ipccis4k71rcb.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "590844832860-ig7p5s0d993l4jslcang724qtkukgcuo.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.br.zbra.zpastel"
+              }
             }
           ]
         }

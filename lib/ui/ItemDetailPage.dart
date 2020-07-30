@@ -23,7 +23,6 @@ class ItemDetailPage extends StatefulWidget {
 }
 
 class _ItemDetailPageState extends State<ItemDetailPage> {
-  final OrderService _orderService = OrderService();
   final NavigationMediator _navigationMediator = NavigationMediator();
 
   Flavor _flavor;
