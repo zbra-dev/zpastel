@@ -137,7 +137,12 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                       color: AppColors.primaryColor,
                       shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(10)),
                       onPressed: () {
-                        _currentOrder.addItem(Pastel(flavor: _flavor, qtdy: _qtdy, extraInformation: _extraInformation));
+                        var item = _currentOrder.items.firstWhere((item) => item.flavor.id == _flavor.id);
+                        if (item == null) {
+                          _currentOrder.addItem(Pastel(flavor: _flavor, qtdy: _qtdy, extraInformation: _extraInformation));
+                        } else {
+                          item.qtdy++;
+                        }
                         _navigationMediator.openReviewOrder(context, _currentOrder);
                       },
                       child: Row(
