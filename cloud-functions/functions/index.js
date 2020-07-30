@@ -78,7 +78,7 @@ exports.sendMail = functions.firestore
   
     const orderData = snap.data();
 
-    const orderItems = '';
+    var orderItems = '';
     orderData.items.forEach((item) => {
         orderItems =  `${orderItems}
                         <tr>
