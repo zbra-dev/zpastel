@@ -138,7 +138,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                       color: AppColors.primaryColor,
                       shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(10)),
                       onPressed: () {
-                        Item item = null;
+                        Item item;
                         if (_currentOrder.items != null && _currentOrder.items.length > 0) {
                           for (Item previousItem in _currentOrder.items) {
                             if (previousItem.flavor.id == _flavor.id) {
