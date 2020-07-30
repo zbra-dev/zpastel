@@ -30,7 +30,7 @@ class AppBarBuilder {
     actions.add(Builder(
       builder: (context) => IconButton(
         icon: new Icon(Icons.close),
-        onPressed: () => _navigationMediator.close(context),
+        onPressed: () => _navigationMediator.popToRootPage(context),
       ),
     ));
     return this;

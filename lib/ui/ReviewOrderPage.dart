@@ -38,7 +38,7 @@ class _ReviewOrderPageState extends State<ReviewOrderPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarBuilder().build(),
+      appBar: AppBarBuilder().withClose().build(),
       body: SafeArea(
         child: Stack(
           children: <Widget>[
