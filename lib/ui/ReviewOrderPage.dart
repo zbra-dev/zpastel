@@ -38,7 +38,7 @@ class _ReviewOrderPageState extends State<ReviewOrderPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarBuilder().withClose().build(),
+      appBar: AppBarBuilder().build(),
       body: SafeArea(
         child: Stack(
           children: <Widget>[
@@ -131,8 +131,9 @@ class _ReviewOrderPageState extends State<ReviewOrderPage> {
                   child: RaisedButton(
                     color: AppColors.red,
                     onPressed: () async {
-                      await _orderService.doOrder(_order);
-                      _order = new Order();
+                      await _orderService.doOrder(new Order.fromJson(_order.toJson()));
+                      _order.items.clear();
+                      _order.id = null;
                       _navigationMediator.popToRootPage(context);
                     },
                     child: Text("Vai Fernandes", style: AppTextTheme.of(context).textDefaultBold.copyWith(fontSize: 16, color: AppColors.white)),

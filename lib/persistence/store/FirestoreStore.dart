@@ -27,7 +27,7 @@ class FirestoreStore<T extends StorableEntity> {
     entity.createdById = entity.createdById ?? userId;
     entity.lastModifiedById = entity.createdById ?? userId;
 
-    _store.runTransaction((transaction) async {
+    return _store.runTransaction((transaction) async {
       try {
         if (entity.id != null && entity.id.isNotEmpty) {
           await _collection.document(entity.id).setData(entity.toJson());
