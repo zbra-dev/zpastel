@@ -25,7 +25,8 @@ class BasePage extends StatelessWidget {
   Future _validateStoredUser(User user) async {
     var userId = await appContext.getUserId();
     if (userId == null || userId != user.id) {
-      appContext.setUserId(user.id);
+      //TODO: fix this
+      //appContext.setUserId(user.id);
     }
   }
 }

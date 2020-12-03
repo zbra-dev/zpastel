@@ -1,9 +1,8 @@
-
 abstract class StorableEntity {
-  String id;
-  String createdById;
+  int id;
+  int createdById;
   DateTime createdOn;
-  String lastModifiedById;
+  int lastModifiedById;
   DateTime lastModifiedOn;
 
   StorableEntity.fromJson(Map<String, dynamic> json);

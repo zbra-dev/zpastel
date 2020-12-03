@@ -1,16 +1,24 @@
-import 'package:zpastel/model/Flavor.dart';
-import 'package:zpastel/persistence/store/FirestoreStore.dart';
+import 'dart:convert';
 
-import 'converters/FlavorConverter.dart';
+import 'package:zpastel/gateway/HttpGateway.dart';
+import 'package:zpastel/model/Flavor.dart';
 
 class FlavorRepository {
-  FirestoreStore<Flavor> _store;
+  HttpGateway _httpGateway;
 
   FlavorRepository() {
-    _store = new FirestoreStore.entity(new Flavor(), FlavorConverter());
+    _httpGateway = new HttpGateway();
   }
 
   Future<List<Flavor>> findAll() async {
-    return await _store.findAll();
+    final response = await _httpGateway.get('http://10.0.2.2:49985/api/pasteis');
+
+    return parseFlavors(response.body);
+  }
+
+  List<Flavor> parseFlavors(String responseBody) {
+    final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
+
+    return parsed.map<Flavor>((json) => Flavor.fromJson(json)).toList();
   }
 }

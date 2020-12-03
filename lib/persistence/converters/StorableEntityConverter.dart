@@ -15,7 +15,7 @@ abstract class StorableEntityConverter<T extends StorableEntity> {
     if (document.exists && document.data.isNotEmpty) {
       var data = document.data;
 
-      entity.id = document.documentID;
+      //entity.id = document.documentID;
       entity.createdById = data['createdById'];
       entity.lastModifiedById = data['lastModifiedById'];
       entity.createdOn = data['createdOn'] != null ? DateTime.parse(data['createdOn'] as String) : DateTime.now();

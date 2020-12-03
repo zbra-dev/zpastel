@@ -138,17 +138,17 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                       shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(10)),
                       onPressed: () {
                         Item item;
-                        if (_currentOrder.items != null && _currentOrder.items.length > 0) {
-                          for (Item previousItem in _currentOrder.items) {
+                        if (_currentOrder.orderItems != null && _currentOrder.orderItems.length > 0) {
+                          for (Item previousItem in _currentOrder.orderItems) {
                             if (previousItem.flavor.id == _flavor.id) {
                               item = previousItem;
                             }
                           }
                         }
                         if (item == null) {
-                          _currentOrder.addItem(Pastel(flavor: _flavor, qtdy: _qtdy, extraInformation: _extraInformation));
+                          _currentOrder.addItem(Pastel(flavor: _flavor, quantity: _qtdy, extraInformation: _extraInformation));
                         } else {
-                          item.qtdy++;
+                          item.quantity++;
                         }
                         _navigationMediator.openReviewOrder(context, _currentOrder);
                       },
@@ -156,7 +156,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Text("Enviar", style: AppTextTheme.of(context).textLarge.copyWith(color: AppColors.negativeTextColor)),
-                          Text("R\$ ${(_qtdy * _flavor.value).toStringAsFixed(2)}", style: AppTextTheme.of(context).textLarge.copyWith(color: AppColors.negativeTextColor)),
+                          Text("R\$ ${(_qtdy * _flavor.price).toStringAsFixed(2)}", style: AppTextTheme.of(context).textLarge.copyWith(color: AppColors.negativeTextColor)),
                         ],
                       ),
                     ),

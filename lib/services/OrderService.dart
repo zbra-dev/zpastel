@@ -13,7 +13,12 @@ class OrderService {
   }
 
   Future doOrder(Order order) async {
+    order.totalPrice = calculateTotalPrice(order.orderItems);
     return await _orderRepository.save(order);
+  }
+
+  double calculateTotalPrice(List<Pastel> orderItems){
+    return orderItems.map((o) => o.quantity * o.flavor.price).reduce((a, b) => a + b);
   }
 
   void addItem(Pastel pastel) {

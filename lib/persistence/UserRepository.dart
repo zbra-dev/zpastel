@@ -59,7 +59,8 @@ class UserRepository {
   User _convertFrom(FirebaseUser firebaseUser) {
     if (firebaseUser != null) {
       var user = new User();
-      user.id = firebaseUser.uid;
+      //TODO: Check this
+      //user.id = firebaseUser.uid;
       user.email = firebaseUser.email;
       user.name = firebaseUser.displayName;
       user.photoUrl = firebaseUser.photoUrl;

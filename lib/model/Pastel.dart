@@ -9,24 +9,26 @@ part 'Pastel.g.dart';
 @JsonSerializable(explicitToJson: true)
 class Pastel implements Item, StorableEntity {
   @override
-  String id;
+  int id;
   @override
-  String orderId;
+  int orderId;
   @override
-  int qtdy;
+  int quantity;
+  @override
+  String ingredients;
   Flavor flavor; // this will be a copy of the flavor for history purpose
   String extraInformation;
 
   @override
-  String createdById;
+  int createdById;
   @override
   DateTime createdOn;
   @override
-  String lastModifiedById;
+  int lastModifiedById;
   @override
   DateTime lastModifiedOn;
 
-  Pastel({this.flavor, this.qtdy, this.extraInformation});
+  Pastel({this.flavor, this.quantity, this.extraInformation});
 
   factory Pastel.fromJson(Map<String, dynamic> json) => _$PastelFromJson(json);
 

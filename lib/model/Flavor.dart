@@ -8,21 +8,21 @@ part 'Flavor.g.dart';
 @JsonSerializable(explicitToJson: true)
 class Flavor implements StorableEntity {
   @override
-  String id;
+  int id;
 
   String name;
   String ingredients; // todo: abstract this in a better way.
-  double value; // todo: improve this
+  double price; // todo: improve this
   String flavorImageUrl;
 
-  String get valueInReal => new NumberFormat("R\$ #,##0.00", "pt_BR").format(value);
+  String get valueInReal => new NumberFormat("R\$ #,##0.00", "pt_BR").format(price);
 
   @override
-  String createdById;
+  int createdById;
   @override
   DateTime createdOn;
   @override
-  String lastModifiedById;
+  int lastModifiedById;
   @override
   DateTime lastModifiedOn;
 

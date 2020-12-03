@@ -7,13 +7,13 @@ part 'User.g.dart';
 @JsonSerializable()
 class User implements StorableEntity {
   @override
-  String id;
+  int id;
   @override
-  String createdById;
+  int createdById;
   @override
   DateTime createdOn;
   @override
-  String lastModifiedById;
+  int lastModifiedById;
   @override
   DateTime lastModifiedOn;
 

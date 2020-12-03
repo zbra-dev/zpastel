@@ -11,8 +11,8 @@ class PastelConverter extends StorableEntityConverter<Pastel> {
     pastel.id = data['Id'];
     pastel.createdById = data['createdById'];
     pastel.createdOn = data['createdOn'];
-    pastel.qtdy = data['qtdy'];
-    pastel.flavor = data['flavor'] as Flavor;
+    pastel.quantity = data['quantity'];
+    pastel.ingredients = data['ingredients'];
     pastel.extraInformation = data['extraInformation'];
     pastel.lastModifiedById = data['lastModifiedById'];
     pastel.lastModifiedOn = data['lastModifiedOn'];

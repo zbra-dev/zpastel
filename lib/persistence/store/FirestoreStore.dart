@@ -27,20 +27,21 @@ class FirestoreStore<T extends StorableEntity> {
     entity.createdById = entity.createdById ?? userId;
     entity.lastModifiedById = entity.createdById ?? userId;
 
-    return _store.runTransaction((transaction) async {
-      try {
-        if (entity.id != null && entity.id.isNotEmpty) {
-          await _collection.document(entity.id).setData(entity.toJson());
-        } else {
-          var doc = await _collection.reference().add(entity.toJson());
-          entity.id = doc.documentID;
-        }
-      } catch (e) {
-        // TODO: Log this
-        print(e);
-        throw e;
-      }
-    });
+    // TODO : Fix this
+    // return _store.runTransaction((transaction) async {
+    //   try {
+    //     if (entity.id != null && entity.id.isNotEmpty) {
+    //       await _collection.document(entity.id).setData(entity.toJson());
+    //     } else {
+    //       var doc = await _collection.reference().add(entity.toJson());
+    //       entity.id = doc.documentID;
+    //     }
+    //   } catch (e) {
+    //     // TODO: Log this
+    //     print(e);
+    //     throw e;
+    //   }
+    //});
   }
 
   Future<List<T>> findEqual(String field, String value) async {

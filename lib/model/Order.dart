@@ -8,20 +8,22 @@ part 'Order.g.dart';
 @JsonSerializable(explicitToJson: true)
 class Order implements StorableEntity {
   @override
-  String id;
+  int id;
 
-  List<Pastel> items = [];
+  List<Pastel> orderItems = [];
 
   String createdByUsername;
 
   @override
-  String createdById;
+  int createdById;
   @override
   DateTime createdOn;
   @override
-  String lastModifiedById;
+  int lastModifiedById;
   @override
   DateTime lastModifiedOn;
+
+  double totalPrice;
 
   Order();
 
@@ -32,6 +34,6 @@ class Order implements StorableEntity {
 
   void addItem(Pastel item) {
     item.orderId = id;
-    items.add(item);
+    orderItems.add(item);
   }
 }

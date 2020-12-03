@@ -67,7 +67,7 @@ class _ReviewOrderPageState extends State<ReviewOrderPage> {
                                   childAspectRatio: 2.8,
                                   mainAxisSpacing: 5,
                                   crossAxisCount: 1,
-                                  children: List.generate(_order.items.length, (index) {
+                                  children: List.generate(_order.orderItems.length, (index) {
                                     return buildFlavorTotal(context, index);
                                   }),
                                 ),
@@ -135,7 +135,7 @@ class _ReviewOrderPageState extends State<ReviewOrderPage> {
                     color: AppColors.red,
                     onPressed: () async {
                       await _orderService.doOrder(new Order.fromJson(_order.toJson()));
-                      _order.items.clear();
+                      _order.orderItems.clear();
                       _order.id = null;
                       _navigationMediator.popToRootPage(context);
                     },
@@ -152,12 +152,12 @@ class _ReviewOrderPageState extends State<ReviewOrderPage> {
 
   double _sumItems() {
     var sum = 0.0;
-    _order.items.forEach((item) => sum += (item.qtdy * item.flavor.value));
+    _order.orderItems.forEach((item) => sum += (item.quantity * item.flavor.price));
     return sum;
   }
 
   Widget buildFlavorTotal(BuildContext context, int index) {
-    final item = _order.items[index];
+    final item = _order.orderItems[index];
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
       decoration: BoxDecoration(color: AppColors.white, borderRadius: BorderRadius.all(Radius.circular(16)), boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.16), blurRadius: 6, offset: Offset(0, 3))]),
@@ -171,7 +171,7 @@ class _ReviewOrderPageState extends State<ReviewOrderPage> {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    "${item.qtdy}x ${item.flavor.name}",
+                    "${item.quantity}x ${item.flavor.name}",
                     style: AppTextTheme.of(context).textDefaultBold.copyWith(fontSize: 17),
                   ),
                 ),
@@ -191,14 +191,14 @@ class _ReviewOrderPageState extends State<ReviewOrderPage> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
                   Text(
-                    "R\$ ${item.flavor.value.toStringAsFixed(2)}",
+                    "R\$ ${item.flavor.price.toStringAsFixed(2)}",
                     style: AppTextTheme.of(context).textDefault.copyWith(fontSize: 15),
                   ),
                   SizedBox(height: 10),
                   IconButton(
                     onPressed: () {
-                      _order.items.removeAt(index);
-                      if (_order.items.isEmpty) {
+                      _order.orderItems.removeAt(index);
+                      if (_order.orderItems.isEmpty) {
                         _navigationMediator.popToRootPage(context);
                       } else {
                         setState(() {});
