@@ -20,6 +20,7 @@ class User implements StorableEntity {
   String email;
   String photoUrl;
   String name;
+  String firebaseId;
 
   bool get hasName {
     return name != null && name.isNotEmpty;

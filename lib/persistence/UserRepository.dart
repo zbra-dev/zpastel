@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:zpastel/gateway/HttpGateway.dart';
 import 'package:zpastel/model/User.dart';
 import 'package:zpastel/persistence/store/FirestoreStore.dart';
 
@@ -8,6 +11,7 @@ import 'converters/UserConverter.dart';
 class UserRepository {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   FirestoreStore<User> _store;
+  HttpGateway httpGateway;
 
   UserRepository() {
     this._store = new FirestoreStore.entity(new User(), UserConverter());
@@ -59,8 +63,7 @@ class UserRepository {
   User _convertFrom(FirebaseUser firebaseUser) {
     if (firebaseUser != null) {
       var user = new User();
-      //TODO: Check this
-      //user.id = firebaseUser.uid;
+      user.firebaseId = firebaseUser.uid;
       user.email = firebaseUser.email;
       user.name = firebaseUser.displayName;
       user.photoUrl = firebaseUser.photoUrl;
@@ -83,10 +86,12 @@ class UserRepository {
   }
 
   Future<void> save(user) async {
-    await _store.save(user);
+    //await httpGateway.post('', );
   }
 
-  Future<User> findBy(String id) async {
-    return await _store.findBy(id);
+  Future<User> findBy(String firebaseId) async {
+    final response = await httpGateway.get('http://10.0.2.2:49985/api/users/$firebaseId');
+
+    return User.fromJson(jsonDecode(response.body));
   }
 }

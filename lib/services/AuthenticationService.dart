@@ -37,19 +37,18 @@ class AuthenticationService {
   }
 
   Future _reconnectOrCreateUser(User user) async {
-    //TODO: Update user repository to use zpastel server
-    // if (user != null) {
-    //   var loadedUser = await _userRepository.findBy(user.id);
-    //   if (loadedUser == null || loadedUser.email == null || loadedUser.createdOn == null) {
-    //     user.createdOn = DateTime.now();
-    //     user.lastModifiedOn = DateTime.now();
-    //     user.createdById = user.id;
-    //     user.lastModifiedById = user.id;
-    //     await _userRepository.save(user);
-    //   } else {
-    //     //TODO: maybe update user entity
-    //   }
-    //   return await _appContextGateway.setUserId(user.id);
-    // }
+    if (user != null) {
+      var loadedUser = await _userRepository.findBy(user.firebaseId);
+      if (loadedUser == null || loadedUser.email == null || loadedUser.createdOn == null) {
+        user.createdOn = DateTime.now();
+        user.lastModifiedOn = DateTime.now();
+        user.createdById = user.id;
+        user.lastModifiedById = user.id;
+        await _userRepository.save(user);
+      } else {
+        //TODO: maybe update user entity
+      }
+      return await _appContextGateway.setUserId(user.id.toString());
+    }
   }
 }
